@@ -12,16 +12,12 @@ const PORT = 3000 || process.env.PORT;
 
 const app  = express();
 
-mongoose.connect(db, { useNewUrlParser: true })
-        .then(() => console.log('DB Connected'))
-        .catch(err => console.log(err));
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('Hello to Dev Connector');
-})
+mongoose.connect(db, { useNewUrlParser: true })
+        .then(() => console.log('DB Connected'))
+        .catch(err => console.log(err));
 
 app.use('/api/users', users);
 app.use('/api/posts', posts);
