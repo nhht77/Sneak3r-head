@@ -5,6 +5,8 @@ const app      = express();
 const db = require('./config/key').mongoURI;
 
 const users = require('./routes/api/users');
+const profiles = require('./routes/api/profiles');
+const posts = require('./routes/api/posts');
 
 const PORT = 3000 || process.env.PORT;
 
@@ -18,5 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/users', users);
+app.use('/api/posts', posts);
+app.use('/api/profiles', profiles);
 
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
