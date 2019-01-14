@@ -1,7 +1,10 @@
 const express = require('express');
 const router  = express.Router();
+const bcrypt  = require('bcryptjs');
+const jwt     = require('jsonwebtoken');
 
 const User = require('../../models/User');
+const configKey  = require('../../config/key').key
 
 router.get('/test', (req, res) => res.json({msg: 'user works'}));
 
@@ -17,12 +20,16 @@ router.post('/register', (req, res) => {
              return res.status(400).json({errors:"Email has already been used"});
         } else {
             const { name, email, password, avatar } = req.body;
-            res.json({ name, email, password, avatar });
             const newUser  = new User({ name, email, password, avatar });
 
-            newUser.save()
-                   .then(user => res.send(user))
-                   .catch(err => res.send(err));
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    newUser.password = hash;
+                    newUser.save()
+                           .then(user => res.json(user))
+                           .catch(err => res.json(err));
+                })
+            })
         }
     });
 
@@ -37,12 +44,23 @@ router.post('/login', (req, res) => {
             errors.email = "User is not found";
             res.status(404).send(errors)
         } 
-        if(user.password === password){
-            res.json({success:true, user});
-        } else {
-            errors.password = "The password is incorrect";
-            res.status(404).send(errors);
-        }
+
+        bcrypt.compare(password, user.password, (isMatch) => {
+            if(!isMatch){
+                const {_id: id, name, email, password } = user;
+                const payload = {id, name, email, password};
+
+                jwt.sign(payload, configKey, {expiresIn:3600}, (err, token) => {
+                    res.json({
+                        success:true,
+                        token: `bearer ${token}`
+                    })
+                })
+            } else {
+                errors.password = "The password is incorrect";
+                res.status(404).send(errors);
+            }
+        })
     }).catch( err => console.log(err));
 })
 
