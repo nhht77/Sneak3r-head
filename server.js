@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const passport   = require('passport');
 
 
-const db        = require('./config/key').mongoURI;
+const db        = require('./config/keys').mongoURI;
 const users     = require('./routes/api/users');
 const profiles  = require('./routes/api/profiles');
 const posts     = require('./routes/api/posts');
@@ -22,7 +22,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 app.use(passport.initialize());
 
-// require('./config/passport')(passport);
+require('./config/passport')(passport);
 
 app.use('/api/users', users);
 app.use('/api/posts', posts);
