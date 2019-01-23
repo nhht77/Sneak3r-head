@@ -6,8 +6,9 @@ const passport   = require('passport');
 
 const db        = require('./config/keys').mongoURI;
 const users     = require('./routes/api/users');
-const profiles  = require('./routes/api/profiles');
-const posts     = require('./routes/api/posts');
+const brands     = require('./routes/api/brands');
+const products     = require('./routes/api/products');
+const conditions  = require('./routes/api/conditions');
 
 const PORT = 3000 || process.env.PORT;
 
@@ -25,7 +26,8 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/api/users', users);
-app.use('/api/posts', posts);
-app.use('/api/profiles', profiles);
+app.use('/api/brands', brands);
+app.use('/api/products', products);
+app.use('/api/conditions', conditions);
 
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
