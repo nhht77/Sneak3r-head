@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport')
 const router  = express.Router();
 
 const Brands = require('../../models/Brands');
@@ -14,11 +15,16 @@ router.get('/', (req, res) => {
     })
 });
 
-router.post('/', (req, res) => {
+router.post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
     const {errors, isValid} = validateBrandsInput(req.body);
 
     if(!isValid){
         res.status(400).json(errors);
+    }
+
+    if(req.user.role === 0 ){
+        errors.authorization = "You are not authorized to have access to this information";
+        res.status(401).json(req.user.role);
     }
 
     Brands.findOne({name: req.body.name}).then(brand => {
