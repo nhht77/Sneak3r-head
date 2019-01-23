@@ -17,14 +17,20 @@ const UserSchema = new Schema({
         type: String,
         required:true
     },
-    avatar:
+    cart: 
     {
-        type: String,
+        type: Array,
+        default:[]
     },
-    date:
+    history: 
     {
-        type:Date,
-        default: Date.now
+        type: Array,
+        default:[]
+    },
+    role:
+    {
+        type:Number,
+        default:0
     }
 })
 

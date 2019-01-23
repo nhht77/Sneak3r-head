@@ -21,6 +21,10 @@ module.exports = function validateRegisterInput(data){
         errors.password = "Password must not be empty";
     } 
 
+    if(!Validator.isLength(data.password, { min: 5, max: undefined })) {
+        errors.password = "Password length must have at least 5 charaters";
+    } 
+
     if(!Validator.isEmail(data.email)) {
         errors.email = "Email is invalid";
     } 
