@@ -4,12 +4,29 @@ const isEmpty   = require('./is-empty');
 module.exports = function validateProductInput(data){
     let errors = {};
 
+    let testData = {...data};
+
+    // Check if price is number then price transfer to be string 
+    if(!isNaN(data.price)){
+        data.price = JSON.stringify(data.price);
+    }
+
+    // Check if colors is array of string then colors transfer to be string 
+    // if(Array.isArray(testData.colors)){
+    //     data.colors = JSON.stringify(data.colors);
+    // }
+
+    // Check if sizes is array of string then sizes transfer to be string 
+    // if(Array.isArray(data.sizes)){
+    //     data.sizes = JSON.stringify(data.sizes);
+    // }
+
     data.name = !isEmpty(data.name) ? data.name : '';
     data.description = !isEmpty(data.description) ? data.description : '';
-    // data.price = !isEmpty(data.price) ? data.price = '' : data.price = JSON.stringify(data.price);
+    data.price = !isEmpty(data.price) ? data.price : '';
     data.brand = !isEmpty(data.brand) ? data.brand : '';
-    // data.colors = !isEmpty(data.colors) ? data.colors = '' : data.colors = JSON.stringify(data.colors);
-    // data.sizes = !isEmpty(data.sizes) ? data.sizes = '' : data.sizes = JSON.stringify(data.sizes);
+    // testData.colors = !isEmpty(testData.colors) ? testData.colors : '';
+    // data.sizes = !isEmpty(data.sizes) ? data.sizes : '';
 
     if(Validator.isEmpty(data.name)){
         errors.name = "Product name field is required"
@@ -19,20 +36,20 @@ module.exports = function validateProductInput(data){
         errors.description = "Product description field is required"
     }
     
-    // if(Validator.isEmpty(data.price)){
-    //     errors.price = "Product price field is required"
-    // }
+    if(Validator.isEmpty(data.price)){
+        errors.price = "Product price field is required"
+    }
 
     if(Validator.isEmpty(data.brand)){
         errors.brand = "Product brand field is required"
     }
 
-    // if(Validator.isEmpty(data.colors)){
+    // if(Validator.isEmpty(testData.colors)){
     //     errors.colors = "Product colors field is required"
     // }
 
     // if(Validator.isEmpty(data.sizes)){
-    //     errors.name = "Product name field is required"
+    //     errors.name = "Product sizes field is required"
     // }
 
     return {
