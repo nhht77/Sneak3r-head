@@ -6,10 +6,10 @@ module.exports = function validateProductInput(data){
 
     data.name = !isEmpty(data.name) ? data.name : '';
     data.description = !isEmpty(data.description) ? data.description : '';
-    data.price = !isEmpty(data.price) ? data.price : '';
+    // data.price = !isEmpty(data.price) ? data.price = '' : data.price = JSON.stringify(data.price);
     data.brand = !isEmpty(data.brand) ? data.brand : '';
-    // data.colors = !isEmpty(data.colors) ? data.colors : '';
-    // // // data.sizes = !isEmpty(data.sizes) ? data.sizes : '';
+    // data.colors = !isEmpty(data.colors) ? data.colors = '' : data.colors = JSON.stringify(data.colors);
+    // data.sizes = !isEmpty(data.sizes) ? data.sizes = '' : data.sizes = JSON.stringify(data.sizes);
 
     if(Validator.isEmpty(data.name)){
         errors.name = "Product name field is required"
