@@ -1,5 +1,6 @@
-const express = require('express');
-const router  = express.Router();
+const express  = require('express');
+const passport = require('passport'); 
+const router   = express.Router();
 
 const Products = require('../../models/Products');
 
@@ -7,7 +8,7 @@ const validateProductInput = require('../../validation/products');
 
 router.get('/test', (req, res) => res.send({ msg: 'Products Test Routes Works'}));
 
-router.post('/', (req, res) => {
+router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
     const { errors, isValid } = validateProductInput(req.body);
 
     if(!isValid){
