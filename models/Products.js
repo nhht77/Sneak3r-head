@@ -34,27 +34,27 @@ const ProductSchema = new Schema({
     },
     avalaible:
     {
-        type:Boolean,
-        required:true
+        type: Boolean,
+        default: true,
     },
     shipping:
     {
-        type:Boolean,
-        required:true
+        type: Boolean,
+        default: false,
     },
     sold:
     {
         type:Number,
         default:0
     },
-    color:
+    colors:
     {
         type:[String],
         required:true
     },
-    size:
+    sizes:
     {
-        type:[String],
+        type:[Number],
         required:true
     },
     images:

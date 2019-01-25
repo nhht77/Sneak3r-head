@@ -26,8 +26,8 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/api/users', users);
-app.use('/api/products/brands', brands);
+app.use('/api/brands', brands);
 app.use('/api/products', products);
-app.use('/api/products/conditions', conditions);
+app.use('/api/conditions', conditions);
 
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
