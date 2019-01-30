@@ -62,6 +62,9 @@ const ProductSchema = new Schema({
         type:Array,
         default:[]
     }
+},
+{
+    timestamps:true
 });
 
 module.exports = Product = mongoose.model('products', ProductSchema);

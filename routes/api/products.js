@@ -1,12 +1,30 @@
 const express  = require('express');
-const passport = require('passport'); 
+const passport = require('passport');
+const mongoose = require('mongoose');
 const router   = express.Router();
 
 const Products = require('../../models/Products');
 
 const validateProductInput = require('../../validation/products');
 
-router.get('/test', (req, res) => res.send({ msg: 'Products Test Routes Works'}));
+router.get('/ids', (req, res) => {
+    let type = req.query.type;
+    let items = req.query.id;
+
+    if(type === "array"){
+        let ids = req.query.id.split(',');
+        items = [];
+        items = ids.map(item=>{
+            return mongoose.Types.ObjectId(item)
+        })
+    }
+
+    Product.
+    find({ '_id':{$in:items}}).
+    populate('brand').
+    populate('conditions').
+    exec( (err,products) => res.status(200).json(products))
+});
 
 router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
     const { errors, isValid } = validateProductInput(req.body);
@@ -22,44 +40,42 @@ router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
         } else {
             const newProduct  = new Products(req.body)
             newProduct.save()
-                    .then(product => res.json(product))
-                    .catch(err => console.log(err))
+            .then(product => res.json(product))
+            .catch(err => console.log(err))
         }
     })
 })
 
 // BY ARRIVAL
-// /articles?sortBy=createdAt&order=desc&limit=4
+// /api/products?sortBy=createdAt&order=desc&limit=4
 
 // BY SELL
-// /articles?sortBy=sold&order=desc&limit=100
+// /api/products?sortBy=sold&order=desc&limit=100
 router.get('/', (req, res) => {
     
     let order = req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
     let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
-    Product.
-    find().
-    populate('brand').
-    populate('conditions').
-    sort([[sortBy,order]]).
-    limit(limit).
-    exec((err,articles)=>{
-        if(err) return res.status(400).send(err);
-        res.send(articles)
-    })
+    Products
+    .find()
+    .populate('brand')
+    .populate('conditions')
+    .sort([[sortBy,order]])
+    .limit(limit)
+    .then(articles => res.send(articles))
+    .catch(err => res.status(400).send(err))
 })
 
 router.get('/:id',(req,res)=>{
 
-    Product.
-    find({ '_id':req.params.id}).
-    populate('brand').
-    populate('conditions').
-    exec((err,docs)=>{
-        return res.status(200).send(docs)
-    })
+    Products
+    .find({ '_id':req.params.id})
+    .populate('brand')
+    .populate('conditions')
+    .then( products => res.status(200).send(products))
+    .catch( err => res.status(400).send(err));
 });
+
 
 module.exports = router;
