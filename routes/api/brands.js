@@ -6,8 +6,15 @@ const Brands = require('../../models/Brands');
 
 const validateBrandsInput = require('../../validation/brands');
 
+// @route   GET api/brands/test
+// @desc    Tests brand route
+// @access  Public
 router.get('/test', (req, res) => res.send({ msg: 'Brands Test Routes Works'}));
 
+
+// @route   GET api/brands/test
+// @desc    Get all brands route
+// @access  Public
 router.get('/', (req, res) => {
     Brands.find({}).then((err, brands) => {
         if(err) return res.status(400).json(err);
@@ -15,6 +22,9 @@ router.get('/', (req, res) => {
     })
 });
 
+// @route   POST api/brands/test
+// @desc    Post all brands route
+// @access  Public
 router.post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
     const {errors, isValid} = validateBrandsInput(req.body);
 

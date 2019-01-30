@@ -5,8 +5,15 @@ const router  = express.Router();
 const Conditions = require('../../models/Condition');
 const validateConditionInput = require('../../validation/conditions');
 
+// @route   GET api/conditions/test
+// @desc    Tests conditions route
+// @access  Public
 router.get('/test', (req, res) => res.send({ msg: 'Conditions Test Routes Works'}));
 
+
+// @route   GET api/conditions/
+// @desc    Get all conditions route
+// @access  Public
 router.get('/', (req, res) => {
     Conditions.find({}).then( (err, conditions) => {
         if(err) res.json(err);
@@ -14,6 +21,10 @@ router.get('/', (req, res) => {
     })
 })
 
+
+// @route   POST api/conditions/
+// @desc    Post new conditions route
+// @access  Private
 router.post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
     const {errors, isValid} = validateConditionInput(req.body);
 

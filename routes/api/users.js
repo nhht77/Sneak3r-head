@@ -19,6 +19,7 @@ const validateRegisterInput = require("../../validation/register");
 // @access  Public
 router.get('/test', (req, res) => res.json({msg: 'user works'}));
 
+
 // @route   POST api/users/register
 // @desc    Register user
 // @access  Public
@@ -48,6 +49,7 @@ router.post('/register', (req, res) => {
         }
     });
 });
+
 
 // @route   GET api/users/login
 // @desc    Login User / Returning JWT Token
@@ -85,6 +87,7 @@ router.post('/login', (req, res) => {
         })	
     }).catch( err => console.log(err));	
 });
+
 
 // @route   GET api/users/current
 // @desc    Return current user
