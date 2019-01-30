@@ -51,4 +51,15 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id',(req,res)=>{
+
+    Product.
+    find({ '_id':req.params.id}).
+    populate('brand').
+    populate('conditions').
+    exec((err,docs)=>{
+        return res.status(200).send(docs)
+    })
+});
+
 module.exports = router;
