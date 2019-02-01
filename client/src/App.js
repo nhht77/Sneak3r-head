@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Landing from './components/Landing/Landing';
+import Register from './components/Auth/Register';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <Header/>
             <div className="page-container">
               <Route exact path='/' component={Landing}/>
+              <Route exact path='/register' component={Register}/>
             </div>
           <Footer/>
         </div>
