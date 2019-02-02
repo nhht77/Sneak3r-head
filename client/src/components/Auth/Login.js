@@ -2,7 +2,6 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import TextFieldGroup from '../Common/TextFieldGroup';
-import axios from 'axios';
 
 import { loginUser } from '../../actions/authAction';
 
@@ -83,27 +82,6 @@ export class Login extends Component {
   }
 }
 
-// <div className="group">
-                            // <div className="form-group">
-                                // <div className="label-inputs">Email</div>
-                                // <input 
-                                    // name="email"
-                                    // value={this.state.email}
-                                    // onChange={this.onChange}
-                                    // type="email" />
-                                // </div>
-                            // </div>
-// 
-                        // <div className="group">
-                            // <div className="form-group">
-                                // <div className="label-inputs">Password</div>
-                                // <input 
-                                    // name="password"
-                                    // value={this.state.password}
-                                    // onChange={this.onChange}
-                                    // type="password" />
-                                // </div>
-                            // </div>
 const mapStatetoProps = state => ({
     auth: state.auth,
     errors: state.errors
