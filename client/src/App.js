@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store.js';
 import './App.css';
 
 import Header from './components/Layout/Header';
@@ -11,6 +13,7 @@ import Login from './components/Auth/Login';
 class App extends Component {
   render() {
     return (
+      <Provider store={store}>
       <Router>
         <div className="App">
           <Header/>
@@ -21,8 +24,8 @@ class App extends Component {
             </div>
           <Footer/>
         </div>
-
-        </Router>
+      </Router>
+      </Provider>
     );
   }
 }

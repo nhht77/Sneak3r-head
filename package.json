@@ -9,16 +9,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.14",
+    "@fortawesome/free-solid-svg-icons": "^5.7.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
+    "i": "^0.3.6",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.3",
+    "npm": "^6.7.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "validator": "^10.11.0"
   }
 }
