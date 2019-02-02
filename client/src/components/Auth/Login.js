@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export class Login extends Component {
@@ -38,7 +39,11 @@ export class Login extends Component {
                 <div className="left">
                     <h1>New Customers</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                    <button>Create An Account</button>
+                    <Link
+                    className='link-default'   
+                    to={"/register"} >
+                    Create An Account
+                    </Link>
                 </div>
 
                 <div className="right">
