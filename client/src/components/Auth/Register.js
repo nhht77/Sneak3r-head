@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+
 import { registerUser } from '../../actions/authAction';
 
 export class Register extends Component {
@@ -24,16 +26,11 @@ export class Register extends Component {
             firstname: this.state.firstName,
             lastname: this.state.lastName,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            password2: this.state.password2
           };
         
-        console.log(userData);
-        
-        this.props.registerUser(userData)
-        // axios.post('/api/users/register', userData)
-        // .then(res =>  console.log(res.data))
-        // .catch(err => {
-        //     this.setState({errors: err.response.data})});
+        this.props.registerUser(userData, this.props.history);
     }
 
     onChange = e => {
@@ -41,8 +38,8 @@ export class Register extends Component {
     }
     
   render() {
-    const {errors} = this.state;
     const {users} = this.props.auth;
+    const {errors} = this.props;
 
     return (
         <div className="container">
@@ -53,7 +50,7 @@ export class Register extends Component {
                         <div className="form-group-two">
                             <div className="group">
                             <div className="form-group">
-                            <div className="label-inputs">First Name</div>
+                            <div className="label-inputs">First Name (*)</div>
                             <input
                                 name="firstName"
                                 value={this.state.firstName}
@@ -75,7 +72,7 @@ export class Register extends Component {
                         </div>
                         <div className="group">
                             <div className="form-group">
-                            <div className="label-inputs">Email</div>
+                            <div className="label-inputs">Email (*)</div>
                             <input 
                                 name="email"
                                 value={this.state.email}
@@ -87,7 +84,7 @@ export class Register extends Component {
                         <div className="form-group-two">
                             <div className="group">
                             <div className="form-group">
-                            <div className="label-inputs">Password</div>
+                            <div className="label-inputs">Password (*)</div>
                             <input 
                                 name="password"
                                 value={this.state.password}
@@ -98,13 +95,13 @@ export class Register extends Component {
                             </div>
                             <div className="group">
                             <div className="form-group">
-                            <div className="label-inputs">Confirm Password</div>
+                            <div className="label-inputs">Confirm Password (*)</div>
                             <input 
                                 name="password2"
                                 value={this.state.password2}
                                 onChange={this.onChange}
                                 type="password" />
-                            {errors.password && <div className="error-label">{errors.password}</div>}
+                            {errors.password2 && <div className="error-label">{errors.password2}</div>}
                             </div>
                             </div>
                         </div>
@@ -123,7 +120,8 @@ export class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    errors: state.errors
 })
 
-export default connect(mapStateToProps, {registerUser})(Register);
+export default connect(mapStateToProps, {registerUser})(withRouter(Register));

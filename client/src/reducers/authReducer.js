@@ -2,7 +2,7 @@ import { TEST_DISPATCH } from "../actions/types";
 
 const initialState = {
     isAuthenticated: false,
-    users: {}
+    user: {}
 }
 
 export default function(state=initialState, action) {
@@ -10,7 +10,7 @@ export default function(state=initialState, action) {
         case TEST_DISPATCH:
             return {
                 ...state,
-                users: action.payload
+                user: action.payload
             }
         default:
             return state;
