@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import TextFieldGroup from '../Common/TextFieldGroup';
 import axios from 'axios';
+
+import { loginUser } from '../../actions/authAction';
+
 
 export class Login extends Component {
 
@@ -8,7 +13,8 @@ export class Login extends Component {
         super();
         this.state = {
             email:'',
-            password:''
+            password:'',
+            errors:{}
         }
     }
     
@@ -20,11 +26,7 @@ export class Login extends Component {
             password: this.state.password
           };
         
-        console.log(userData);
-        
-        axios.post('/api/users/login', userData)
-        .then(res =>  console.log(res.data))
-        .catch(err => console.log(err.response.data));
+        this.props.loginUser(userData);
     }
 
     onChange = e => {
@@ -32,6 +34,9 @@ export class Login extends Component {
     }
 
   render() {
+
+    const {errors} = this.state; 
+
     return (
         <div className="page-wrapper">
         <div className="container">
@@ -51,30 +56,23 @@ export class Login extends Component {
                         <p>If you have an account please log in.</p>
                         <div className="signin-wrapper">
                         <form onSubmit={this.onSubmit}>
-                        <div className="group">
-                            <div className="form-group">
-                                <div className="label-inputs">Email</div>
-                                <input 
-                                    name="email"
-                                    value={this.state.email}
-                                    onChange={this.onChange}
-                                    type="email" />
-                                </div>
-                            </div>
+                        <TextFieldGroup 
+                            label="Email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onChange}
+                            type="email"
+                            error = {errors.email}/>
 
-                        <div className="group">
-                            <div className="form-group">
-                                <div className="label-inputs">Password</div>
-                                <input 
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.onChange}
-                                    type="password" />
-                                </div>
-                            </div>
-                            <button>
-                                Log in
-                            </button>
+                        <TextFieldGroup 
+                            label="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onChange}
+                            type="password"
+                            error = {errors.password}/>
+
+                            <button>Log in</button>
                         </form>
                         </div>
                 </div>
@@ -85,4 +83,30 @@ export class Login extends Component {
   }
 }
 
-export default Login
+// <div className="group">
+                            // <div className="form-group">
+                                // <div className="label-inputs">Email</div>
+                                // <input 
+                                    // name="email"
+                                    // value={this.state.email}
+                                    // onChange={this.onChange}
+                                    // type="email" />
+                                // </div>
+                            // </div>
+// 
+                        // <div className="group">
+                            // <div className="form-group">
+                                // <div className="label-inputs">Password</div>
+                                // <input 
+                                    // name="password"
+                                    // value={this.state.password}
+                                    // onChange={this.onChange}
+                                    // type="password" />
+                                // </div>
+                            // </div>
+const mapStatetoProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+})
+
+export default connect(mapStatetoProps, {loginUser})(Login);
