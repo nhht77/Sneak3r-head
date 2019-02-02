@@ -11,6 +11,7 @@ export class Register extends Component {
             email:'',
             password:'',
             password2:'',
+            errors:{}
         }
     }
     
@@ -28,7 +29,8 @@ export class Register extends Component {
         
         axios.post('/api/users/register', userData)
         .then(res =>  console.log(res.data))
-        .catch(err => console.log(err.response.data));
+        .catch(err => {
+            this.setState({errors: err.response.data})});
     }
 
     onChange = e => {
@@ -36,6 +38,8 @@ export class Register extends Component {
     }
     
   render() {
+    const {errors} = this.state;
+
     return (
         <div className="container">
             <div className="register-login-container">
@@ -45,12 +49,13 @@ export class Register extends Component {
                         <div className="form-group-two">
                             <div className="group">
                             <div className="form-group">
-                            <div className="label-inputs">Name</div>
+                            <div className="label-inputs">First Name</div>
                             <input
                                 name="firstName"
                                 value={this.state.firstName}
                                 onChange={this.onChange}
                                 type="text" />
+                            {errors.firstname && <div className="error-label">{errors.firstname}</div>}
                             </div>
                             </div>
                             <div className="group">
@@ -72,6 +77,7 @@ export class Register extends Component {
                                 value={this.state.email}
                                 onChange={this.onChange}
                                 type="email" />
+                            {errors.email && <div className="error-label">{errors.email}</div>}
                         </div>
                         <h2>Verify password</h2>
                         <div className="form-group-two">
@@ -83,6 +89,7 @@ export class Register extends Component {
                                 value={this.state.password}
                                 onChange={this.onChange}
                                 type="password" />
+                            {errors.password && <div className="error-label">{errors.password}</div>}
                             </div>
                             </div>
                             <div className="group">
@@ -93,6 +100,7 @@ export class Register extends Component {
                                 value={this.state.password2}
                                 onChange={this.onChange}
                                 type="password" />
+                            {errors.password && <div className="error-label">{errors.password}</div>}
                             </div>
                             </div>
                         </div>
