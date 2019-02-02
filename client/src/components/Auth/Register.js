@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import {connect} from 'react-redux';
+import { registerUser } from '../../actions/authAction';
 
 export class Register extends Component {
 
@@ -27,10 +29,11 @@ export class Register extends Component {
         
         console.log(userData);
         
-        axios.post('/api/users/register', userData)
-        .then(res =>  console.log(res.data))
-        .catch(err => {
-            this.setState({errors: err.response.data})});
+        this.props.registerUser(userData)
+        // axios.post('/api/users/register', userData)
+        // .then(res =>  console.log(res.data))
+        // .catch(err => {
+        //     this.setState({errors: err.response.data})});
     }
 
     onChange = e => {
@@ -39,13 +42,14 @@ export class Register extends Component {
     
   render() {
     const {errors} = this.state;
+    const {users} = this.props.auth;
 
     return (
         <div className="container">
             <div className="register-login-container">
                 <div className="left">
                     <form onSubmit={this.onSubmit}>
-                    <h2>Personal information</h2>
+                    <h2>Personal information {users ? users.firstname : null}</h2>
                         <div className="form-group-two">
                             <div className="group">
                             <div className="form-group">
@@ -118,4 +122,8 @@ export class Register extends Component {
   }
 }
 
-export default Register
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, {registerUser})(Register);
