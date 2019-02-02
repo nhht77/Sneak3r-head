@@ -34,9 +34,9 @@ router.post('/register', (req, res) => {
              errors.email = "Email has already been used";
              return res.status(400).json({errors});
         } else {
-            const { name, email, password} = req.body;
+            const { firstname, lastname, email, password} = req.body;
             const avatar = gravatar.url(email, { s: '200', r: 'pg', d:'mm'})
-            const newUser  = new User({ name, email, password, avatar });
+            const newUser  = new User({ firstname, lastname, email, password, avatar });
 
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {

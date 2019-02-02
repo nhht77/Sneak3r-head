@@ -5,12 +5,12 @@ module.exports = function validateRegisterInput(data){
     let errors = {};
 
     // condition ? value-if-true : value-if-false
-    data.name = !isEmpty(data.name) ? data.name : ""; 
+    data.firstname = !isEmpty(data.firstname) ? data.firstname : ""; 
     data.email = !isEmpty(data.email) ? data.email : ""; 
     data.password = !isEmpty(data.password) ? data.password : ""; 
 
-    if(Validator.isEmpty(data.name)) {
-        errors.name = "Name must not be empty";
+    if(Validator.isEmpty(data.firstname)) {
+        errors.firstname = "First name must not be empty";
     } 
 
     if(Validator.isEmpty(data.email)) {
