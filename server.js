@@ -10,7 +10,7 @@ const brands     = require('./routes/api/brands');
 const products     = require('./routes/api/products');
 const conditions  = require('./routes/api/conditions');
 
-const PORT = 5000 || process.env.PORT;
+const PORT = 3000 || process.env.PORT;
 
 const app  = express();
 

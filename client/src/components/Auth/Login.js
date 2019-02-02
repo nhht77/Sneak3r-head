@@ -1,6 +1,35 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export class Login extends Component {
+
+    constructor(){
+        super();
+        this.state = {
+            email:'',
+            password:''
+        }
+    }
+    
+    onSubmit = e => {
+        e.preventDefault();
+
+        const userData = {
+            email: this.state.email,
+            password: this.state.password
+          };
+        
+        console.log(userData);
+        
+        axios.post('/api/users/login', userData)
+        .then(res =>  console.log(res.data))
+        .catch(err => console.log(err.response.data));
+    }
+
+    onChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
   render() {
     return (
         <div className="page-wrapper">
@@ -16,23 +45,33 @@ export class Login extends Component {
                         <h1>Registered customers</h1>
                         <p>If you have an account please log in.</p>
                         <div className="signin-wrapper">
+                        <form onSubmit={this.onSubmit}>
                         <div className="group">
                             <div className="form-group">
-                                <div className="label-inputs">Password</div>
-                                <input type="password" />
+                                <div className="label-inputs">Email</div>
+                                <input 
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.onChange}
+                                    type="email" />
                                 </div>
                             </div>
 
                         <div className="group">
                             <div className="form-group">
                                 <div className="label-inputs">Password</div>
-                                <input type="password" />
+                                <input 
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.onChange}
+                                    type="password" />
                                 </div>
                             </div>
+                            <button>
+                                Log in
+                            </button>
+                        </form>
                         </div>
-                        <button>
-                            Log in
-                        </button>
                 </div>
             </div>
         </div>
