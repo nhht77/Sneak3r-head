@@ -1,4 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faCompass } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faClock } from '@fortawesome/free-solid-svg-icons'
 
 export class Footer extends Component {
   render() {
@@ -14,31 +19,31 @@ export class Footer extends Component {
                             <h2>Contact information</h2>
                             <div className="business-info">
                                 <div className="tag">
-                                    Tag Compass
+                                <FontAwesomeIcon icon={faCompass} className="icon"/>
                                     <div className="info">
                                         <div>Address</div>
-                                        <div>Address Info</div>
+                                        <div>Kajanninkatu, Oulu</div>
                                     </div>
                                 </div>
                                 <div className="tag">
-                                    Tag Phone
+                                    <FontAwesomeIcon icon={faPhone} className="icon"/>
                                     <div className="info">
                                         <div>Phone</div>
-                                        <div>Phone number</div>
+                                        <div>+358 469 460 018</div>
                                     </div>
                                 </div>
                                 <div className="tag">
-                                    Tag Clock
+                                <FontAwesomeIcon icon={faClock} className="icon"/>
                                     <div className="info">
                                         <div>Working hours</div>
-                                        <div>Working Hours Info</div>
+                                        <div>10am - 8pm</div>
                                     </div>
                                 </div>
                                 <div className="tag">
-                                    Tag Envelope Email
+                                <FontAwesomeIcon icon={faEnvelope} className="icon"/>
                                     <div className="info">
                                         <div>Email</div>
-                                        <div>Email Info</div>
+                                        <div>Sneak3rTrung@gmail.com</div>
                                     </div>
                                 </div>
                             </div>
