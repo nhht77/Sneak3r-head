@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import {logoutUser} from '../../actions/authAction';
 
 class Header extends Component {
 
@@ -13,7 +14,7 @@ class Header extends Component {
                 <Link to="/">My Cart</Link>
                 <Link to="/">My Account</Link>
                 <div className="logout-link"
-                    onClick={()=> {}}>
+                    onClick={this.props.logoutUser}>
                     Log out
                 </div>
             </div>
@@ -52,4 +53,4 @@ const mapStateToProps = state => ({
     auth: state.auth
   });
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, {logoutUser})(Header);
