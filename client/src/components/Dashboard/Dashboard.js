@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from "../Common/Sidebar";
+import DefaultButton from "../Common/Button/DefaultButton";
+
 
 export class Dashboard extends Component {
   
@@ -14,6 +16,9 @@ export class Dashboard extends Component {
                 <span>Lastname</span>
                 <span>Email</span>
             </div>
+            <DefaultButton 
+                title="Edit your Info" 
+                to="/user/profile"/>
         </div>
 
         <div className="user-info-panel">
