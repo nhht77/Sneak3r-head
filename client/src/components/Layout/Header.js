@@ -11,8 +11,8 @@ class Header extends Component {
 
         const authLinks = (
             <div className="top">
-                <Link to="/">My Cart</Link>
-                <Link to="/">My Account</Link>
+                <Link to="/user/cart">My Cart</Link>
+                <Link to="/user/dashboard">My Account</Link>
                 <div className="logout-link"
                     onClick={this.props.logoutUser}>
                     Log out
@@ -51,6 +51,6 @@ class Header extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth
-  });
+});
 
 export default connect(mapStateToProps, {logoutUser})(Header);
