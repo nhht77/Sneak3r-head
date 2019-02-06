@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store.js';
 import './App.css';
+
+import PrivateRoute from './components/Common/PrivateRoute';
 
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -22,7 +24,9 @@ class App extends Component {
               <Route exact path='/' component={Landing}/>
               <Route exact path='/register' component={Register}/>
               <Route exact path='/login' component={Login}/>
-              <Route exact path='/user/dashboard' component={Dashboard}/>
+              <Switch>
+                <PrivateRoute exact path='/user/dashboard' component={Dashboard}/>
+              </Switch>
             </div>
           <Footer/>
         </div>
