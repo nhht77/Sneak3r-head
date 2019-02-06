@@ -34,7 +34,7 @@ export class Login extends Component {
 
   render() {
 
-    const {errors} = this.state; 
+    const {errors} = this.props; 
 
     return (
         <div className="page-wrapper">
