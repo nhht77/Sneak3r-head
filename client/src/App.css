@@ -522,7 +522,7 @@ body {
     padding: 1rem 0 .625rem 0;
   }
   
-  .card-item-wrapper .actions .button-wrapp:nth-child(1) {
+  .card-item-wrapper .actions .button-wrap:nth-child(1) {
     flex-grow: 1;
     padding-right: .625rem;
   }
