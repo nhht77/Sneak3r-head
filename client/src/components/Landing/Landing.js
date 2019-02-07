@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Slider from "./Slider";
+import Promotion from "./Promotion";
 
 export class Landing extends Component {
   render() {
@@ -7,6 +8,7 @@ export class Landing extends Component {
       <div>
         <Slider/>
           This is the homepage
+        <Promotion/>
       </div>
     )
   }

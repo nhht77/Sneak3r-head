@@ -6,7 +6,7 @@ const DefaultButton = ({title, to, className, addStyles}) => {
         <Link
             className={!className ? 'link-default' : className}   
             to={to}
-            {...addStyles}
+            style={{...addStyles}}
         >
         {title}
         </Link>
