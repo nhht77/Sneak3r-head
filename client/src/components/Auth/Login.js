@@ -32,6 +32,18 @@ export class Login extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
+  componentDidMount = () => {
+    if(this.props.auth.isAuthenticated){
+        this.props.history.push('/');
+    }
+  }
+
+  componentWillReceiveProps = props => {
+      if(props.auth.isAuthenticated){
+        this.props.history.push('/');
+      }
+  }
+  
   render() {
 
     const {errors} = this.props; 

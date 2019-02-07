@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 import store from './store.js';
 import './App.css';
 
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentUser, logoutUser } from "./actions/authAction";
+
 import PrivateRoute from './components/Common/PrivateRoute';
 
 import Header from './components/Layout/Header';
@@ -12,6 +16,26 @@ import Landing from './components/Landing/Landing';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Dashboard from './components/Dashboard/Dashboard.js';
+
+if(localStorage.jwtToken){
+  let token = localStorage.jwtToken;
+  // Set Token to Auth Header
+  setAuthToken(token);
+  // Decode Token
+  const decoded = jwt_decode(token);
+  // Set Current User
+  store.dispatch(setCurrentUser(decoded));
+
+  // Check for expired Token
+  let now = Date.now() / 1000;
+  if(token.exp < now){
+    // Log User Out
+    store.dispatch(logoutUser());
+
+    // Redirect to Login
+    window.location.href = "/login";
+  }
+}
 
 class App extends Component {
   render() {
@@ -35,7 +59,6 @@ class App extends Component {
     );
   }
 }
-// {<Route exact path ="/" component={Landing}/>}
-
 
 export default App;
+

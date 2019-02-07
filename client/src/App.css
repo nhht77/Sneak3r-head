@@ -341,6 +341,7 @@ body {
   footer .wrapper {
     display: flex;
     color: #828282;
+    padding-top: 0.5rem;
   }
   
   footer .left,
@@ -779,6 +780,7 @@ body {
   
   .user-container .user-left-nav {
     border-right: 1px solid #f8f8f8; 
+    margin-top: 2rem;
   }
   
   .user-container .user-left-nav .links a {
