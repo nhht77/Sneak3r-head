@@ -789,7 +789,7 @@ body {
     width: 17.5rem;
   }
   
-  .user-container  .user-right {
+  .user-container  .user-right-nav {
     flex-grow: 1;
     padding: 0 0 0 1.8125rem;
   }
