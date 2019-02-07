@@ -40,7 +40,7 @@ class Header extends Component {
                             {isAuthenticated ? authLinks : guestLinks }
                         <div className="bottom">
                             <Link to="/">Home</Link>
-                            <Link to="/shop">Shoes</Link>
+                            <Link to="/shop">Shop</Link>
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ export class Footer extends Component {
                                 <FontAwesomeIcon icon={faCompass} className="icon"/>
                                     <div className="info">
                                         <div>Address</div>
-                                        <div>Kajanninkatu, Oulu</div>
+                                        <div>34 Kajanninkatu, Oulu</div>
                                     </div>
                                 </div>
                                 <div className="tag">
