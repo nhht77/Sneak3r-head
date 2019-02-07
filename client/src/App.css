@@ -783,6 +783,10 @@ body {
     margin-top: 2rem;
   }
   
+  .user-container .user-left-nav > div:last-child {
+    margin-top: 1.5rem; 
+  }
+
   .user-container .user-left-nav .links a {
     display: block;
     border-bottom: 1px solid #dddddd;
@@ -792,7 +796,7 @@ body {
     width: 17.5rem;
   }
   
-  .user-container  .user-right-nav {
+  .user-container .user-right-nav {
     flex-grow: 1;
     padding: 0 0 0 1.8125rem;
   }

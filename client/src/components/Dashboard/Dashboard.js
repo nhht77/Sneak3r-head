@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+
 import Sidebar from "../Common/Sidebar";
 import DefaultButton from "../Common/Button/DefaultButton";
 
@@ -7,6 +9,8 @@ export class Dashboard extends Component {
   
     
   render() {
+    const {firstname, lastname, email} = this.props.auth.user;
+
     return (
         <div className="container">
         <div className="user-container">
@@ -15,9 +19,9 @@ export class Dashboard extends Component {
             <div className="user-info-panel">
                 <h1>User information</h1>
                 <div>
-                    <span>Name</span>
-                    <span>Lastname</span>
-                    <span>Email</span>
+                    <span>First Name: {firstname}</span>
+                    <span>Last Name: {lastname}</span>
+                    <span>Email: {email}</span>
                 </div>
                 <DefaultButton 
                     title="Edit your Info" 
@@ -38,4 +42,8 @@ export class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps)(Dashboard)
