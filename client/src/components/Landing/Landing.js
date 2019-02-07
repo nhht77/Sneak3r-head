@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Slider from "./Slider";
 import Promotion from "./Promotion";
+import CardGroup from "../Common/Card/CardGroup";
 
 import {getProductByArrival, getProductBySell} from '../../actions/productAction';
 
@@ -18,8 +19,15 @@ export class Landing extends Component {
     return (
       <div>
         <Slider/>
-          This is the homepage
+        <CardGroup
+          title="Best Selling Sneaker"
+          products={this.props.products.bySell}
+        />
         <Promotion/>
+        <CardGroup
+          title="New Arrival"
+          products={this.props.products.byArrival}
+        />
       </div>
     )
   }
