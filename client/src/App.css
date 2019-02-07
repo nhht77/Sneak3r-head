@@ -11,7 +11,7 @@ body {
   }
   .page-container {
     min-height: 75vh;
-    padding-top: 10rem;
+    padding-top: 8rem;
   }
   .main-loader {
     text-align: center;
@@ -378,11 +378,12 @@ body {
     position:relative;
     background-size: cover !important;
     background-position: center left !important;
+    height: 70vh;
   }
   
   .featured-container .featured-action {
     position: absolute;
-    top: 45%;
+    top: 20%;
     left: 8%;
   }
   
@@ -982,6 +983,26 @@ body {
 
     input {
       padding:0;
+    }
+
+    /* Feature Images */
+
+    .featured-container .featured-image {
+      height: 321px;
+    }
+
+    .featured-container .featured-action {
+      top:25%;
+      left:3%;
+    }
+
+    .featured-container .featured-action .tag.title {
+      font-size: 2.375rem;
+      font-weight: 400;
+    }
+
+    .featured-container .featured-action .tag.low-title {
+      font-size: 2.125rem;
     }
 
     /* Footer */
