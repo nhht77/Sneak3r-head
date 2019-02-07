@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DefaultButton from "../Button/DefaultButton";
+import CartButton from '../Button/CartButton';
 
 export class Card extends Component {
 
@@ -41,25 +42,18 @@ export class Card extends Component {
                     className="card-link"
                     title="View product"
                     to={`/product_detail/${this.props.product._id}`}
-                    addStyles={{margin: '10px 0 0 0'}}
                 />
             </div>
-
-            
+            <div className="button-wrap">
+                <CartButton 
+                    onClick={()=> console.log("You add an Item") }
+                />
+            </div>
             </div>
         </div>
       </div>
     )
   }
 }
-
-// { props.grid ?
-    // <div className="description">
-        // <p>
-            // {props.description}
-        // </p>    
-    // </div>
-    // :null
-// }
 
 export default Card
