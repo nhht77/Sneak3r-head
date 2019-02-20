@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import PageTop from "../Common/PageTop";
 
+import PageTop from "../Common/PageTop";
+import CollapseCheckBox from "../Common/CollapseCheckBox";
 
 import { getProductBrand, getProductCondition } from "../../actions/productAction";
 
@@ -20,7 +21,10 @@ class Shop extends Component {
         <div className="container">
             <div className="shop-wrapper">
             <div className="left">
-
+              <CollapseCheckBox 
+                name="Brands"
+                list={this.props.brand}
+                onFilter={() => {}}/>
             </div>
             <div className="right">
                 Right

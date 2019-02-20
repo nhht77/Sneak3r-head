@@ -41,18 +41,18 @@ export const getProductBySell = () => dispatch => {
 
 export const getProductBrand = () => dispatch => {
     axios.get('/api/brands')
-         .then(res => {
-            dispatch({
-                type:GET_PRODUCT_BRANDS,
-                payload: res.data
-            })
-         })
-         .catch(
+         .then( res => {
              dispatch({
-                type:GET_PRODUCT_BRANDS,
-                payload: null
-            })
-         )
+                 type: GET_PRODUCT_BRANDS,
+                 payload:res.data
+             })
+         })
+         .catch( err => {
+             dispatch({
+                type: GET_PRODUCT_BRANDS,
+                payload:null
+             })
+         })
 }
 
 export const getProductCondition = () => dispatch => {

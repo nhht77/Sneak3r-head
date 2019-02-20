@@ -19,10 +19,9 @@ export class CollapseCheckBox extends Component {
   render() {
     return (
       <div className="collapse-items-wrapper">
-      <List>
-        <ListItem button onClick={this.handleClick}>
+      <List style={{borderBottom: '1px solid #dbdbdb'}}>
+        <ListItem button onClick={this.handleClick} style={{padding:'10px 23px 10px 0'}}>
                 <ListItemText inset primary="Some text" />
-                Some text here
                 {this.state.open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={this.state.open} timeout="auto" unmountOnExit>
@@ -30,7 +29,6 @@ export class CollapseCheckBox extends Component {
                   <ListItem button>
                     <ListItemText inset primary="Some text" />
 
-                    some text here
                   </ListItem>
                 </List>
               </Collapse>
