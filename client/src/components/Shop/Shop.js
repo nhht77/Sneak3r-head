@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PageTop from "../Common/PageTop";
 
+
 import { getProductBrand, getProductCondition } from "../../actions/productAction";
 
 class Shop extends Component {
@@ -22,7 +23,7 @@ class Shop extends Component {
 
             </div>
             <div className="right">
-
+                Right
             </div>
             </div>
         </div>

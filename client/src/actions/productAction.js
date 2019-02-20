@@ -40,8 +40,8 @@ export const getProductBySell = () => dispatch => {
 }
 
 export const getProductBrand = () => dispatch => {
-    axios.get('/api/products')
-         .then( res => {
+    axios.get('/api/brands')
+         .then(res => {
             dispatch({
                 type:GET_PRODUCT_BRANDS,
                 payload: res.data
