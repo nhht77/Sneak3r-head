@@ -6,6 +6,7 @@ import CollapseCheckBox from "../Common/CollapseCheckBox";
 
 import { getProductBrand, getProductCondition } from "../../actions/productAction";
 
+
 class Shop extends Component {
 
     componentDidMount = () => {
@@ -23,7 +24,7 @@ class Shop extends Component {
             <div className="left">
               <CollapseCheckBox 
                 name="Brands"
-                list={this.props.brand}
+                lists={this.props.brands}
                 onFilter={() => {}}/>
             </div>
             <div className="right">
@@ -37,9 +38,9 @@ class Shop extends Component {
 }
 
 const mapStateToProps = state => ({
-    product: state.product,
-    brand: state.brand,
-    condition: state.condition
+  products: state.product,
+  brands: state.brand,
+  conditions: state.condition
 })
 
 export default connect(mapStateToProps, {getProductBrand, getProductCondition})(Shop)

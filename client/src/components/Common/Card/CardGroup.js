@@ -16,11 +16,9 @@ const CardGroup = ({title, products}) => {
         <div className="card-group">
             <div className="container">
                 { title 
-                    ?
-                    <div className="title">
+                    ? <div className="title">
                         {title}
                     </div>
-                    
                     : null 
                 }
                 <div style={{
