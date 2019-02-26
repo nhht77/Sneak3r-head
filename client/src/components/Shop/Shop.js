@@ -29,7 +29,7 @@ class Shop extends Component {
     componentDidMount = () => {
       this.props.getProductBrand();
       this.props.getProductCondition();
-      // this.props.getProductToShop(this.state.skip, this.state.limit, this.state.filters);
+      this.props.getProductToShop(this.state.skip, this.state.limit, this.state.filters);
     }
     
     

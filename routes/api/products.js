@@ -75,6 +75,39 @@ router.get('/', (req, res) => {
     .catch(err => res.status(400).send(err))
 })
 
+// @route   POST api/products/shop
+// @desc    Get Products by limits, brands, conditions filter
+// @access  Public
+router.post('/shop', (req, res) => {
+    let order = req.body.order ? req.body.order : "desc";
+    let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    let limit = req.body.limit ? parseInt(req.body.limit) : 100; 
+    let skip = parseInt(req.body.skip);
+    let findArgs = {};
+
+    for(let key in req.body.filters){
+        if(req.body.filters[key].length >0 ){
+            if(key === 'price'){
+                findArgs[key] = {
+                    $gte: req.body.filters[key][0],
+                    $lte: req.body.filters[key][1]
+                }
+            }else{
+                findArgs[key] = req.body.filters[key]
+            }
+        }
+    }
+
+    Products.find(findArgs)
+            .populate('brand')
+            .populate('conditions')
+            .sort([[sortBy,order]])
+            .skip(skip)
+            .limit(limit)
+            .then(products => res.json({products, size:products.length}))
+            .catch(err => res.status(400).send(err))
+})
+
 // @route   GET api/products/:id
 // @desc    Get product by id
 // @access  Public
