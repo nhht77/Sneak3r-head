@@ -7,6 +7,7 @@ import CollapseRadio from "../Common/CollapseRadio";
 
 import { getProductBrand, getProductCondition, getProductToShop } from "../../actions/productAction";
 import { price, sizes } from "../../utils/dummyData";
+import  GetMoreCard from '../Common/Card/GetMoreCard';
 
 
 class Shop extends Component {
@@ -58,7 +59,18 @@ class Shop extends Component {
                 onFilter={() => {}}/>
             </div>
             <div className="right">
-                Right
+              <div className="shop-options">
+                  <div className="shop-grids clear">grids</div>
+              </div>
+              <div>
+              <GetMoreCard
+                grid={this.state.grid}
+                limit={this.state.limit}
+                size={this.props.products.bySize}
+                products={this.props.products.byShop}
+                loadMore={()=> this.loadMoreCards()}
+              />
+              </div>
             </div>
             </div>
         </div>
