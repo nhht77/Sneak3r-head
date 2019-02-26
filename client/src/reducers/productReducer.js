@@ -1,4 +1,4 @@
-import { GET_PRODUCTS_BY_ARRIVAL, GET_PRODUCTS_BY_SELL } from "../actions/types";
+import { GET_PRODUCTS_BY_ARRIVAL, GET_PRODUCTS_BY_SELL, GET_PRODUCT_TO_SHOP } from "../actions/types";
 
 const initialState = {};
 
@@ -13,6 +13,12 @@ export default function(state=initialState, action){
             return {
                 ...state,
                 bySell: action.payload,
+            }
+        case GET_PRODUCT_TO_SHOP:
+            return {
+                ...state,
+                byShop: action.payload.products,
+                bySize: action.payload.size
             }
         default:
             return state;

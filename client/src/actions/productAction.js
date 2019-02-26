@@ -3,7 +3,8 @@ import {
     GET_PRODUCTS_BY_ARRIVAL, 
     GET_PRODUCTS_BY_SELL,
     GET_PRODUCT_BRANDS,
-    GET_PRODUCT_CONDITIONS
+    GET_PRODUCT_CONDITIONS,
+    GET_PRODUCT_TO_SHOP
  } 
     from "./types";
 
@@ -69,4 +70,20 @@ export const getProductCondition = () => dispatch => {
                 payload: null
             })
          )
+}
+
+export const getProductToShop = (skip, limit, filters) => dispatch => {
+    axios.post('/api/products/shop', {skip, limit, filters})
+         .then(res => {
+             dispatch({
+                 type:GET_PRODUCT_TO_SHOP,
+                 payload:res.data
+             })
+         })
+         .catch( err => {
+            dispatch({
+                type:GET_PRODUCT_TO_SHOP,
+                payload:null
+            })
+        })
 }

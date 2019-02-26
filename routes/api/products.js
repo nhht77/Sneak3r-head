@@ -71,7 +71,7 @@ router.get('/', (req, res) => {
     .populate('conditions')
     .sort([[sortBy,order]])
     .limit(limit)
-    .then(articles => res.send(articles))
+    .then(products => res.send(products))
     .catch(err => res.status(400).send(err))
 })
 

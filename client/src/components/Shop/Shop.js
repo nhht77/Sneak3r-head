@@ -5,16 +5,31 @@ import PageTop from "../Common/PageTop";
 import CollapseCheckBox from "../Common/CollapseCheckBox";
 import CollapseRadio from "../Common/CollapseRadio";
 
-import { getProductBrand, getProductCondition } from "../../actions/productAction";
+import { getProductBrand, getProductCondition, getProductToShop } from "../../actions/productAction";
 import { price, sizes } from "../../utils/dummyData";
 
 
 class Shop extends Component {
+  
+    constructor(){
+      super();
+      this.state={
+        grid:'',
+        limit:6,
+        skip:0,
+        filters:{
+          brand:[],
+          Sizes:[],
+          Prizes:[],
+          Conditions:[]
+        }
+      }
+    }
 
     componentDidMount = () => {
       this.props.getProductBrand();
       this.props.getProductCondition();
-      console.log(this.props.conditions);
+      // this.props.getProductToShop(this.state.skip, this.state.limit, this.state.filters);
     }
     
     
@@ -30,7 +45,7 @@ class Shop extends Component {
                 lists={this.props.brands}
                 onFilter={() => {}}/>
               <CollapseCheckBox 
-                name="Size"
+                name="Sizes"
                 lists={sizes}
                 onFilter={() => {}}/>
               <CollapseRadio 
@@ -58,4 +73,4 @@ const mapStateToProps = state => ({
   conditions: state.condition
 })
 
-export default connect(mapStateToProps, {getProductBrand, getProductCondition})(Shop)
+export default connect(mapStateToProps, {getProductBrand, getProductCondition, getProductToShop})(Shop)
