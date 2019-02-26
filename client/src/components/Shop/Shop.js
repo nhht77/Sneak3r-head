@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import PageTop from "../Common/PageTop";
 import CollapseCheckBox from "../Common/CollapseCheckBox";
+import CollapseRadio from "../Common/CollapseRadio";
 
 import { getProductBrand, getProductCondition } from "../../actions/productAction";
 import { price, sizes } from "../../utils/dummyData";
@@ -32,7 +33,7 @@ class Shop extends Component {
                 name="Size"
                 lists={sizes}
                 onFilter={() => {}}/>
-              <CollapseCheckBox 
+              <CollapseRadio 
                 name="Prices"
                 lists={price}
                 onFilter={() => {}}/>
