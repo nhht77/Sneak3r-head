@@ -18,7 +18,7 @@ class Shop extends Component {
         limit:6,
         skip:0,
         filters:{
-          brand:[],
+          Brands:[],
           Sizes:[],
           Prizes:[],
           Conditions:[]

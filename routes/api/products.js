@@ -68,7 +68,7 @@ router.get('/', (req, res) => {
     Products
     .find()
     .populate('brand')
-    .populate('conditions')
+    .populate('condition')
     .sort([[sortBy,order]])
     .limit(limit)
     .then(products => res.send(products))
@@ -100,7 +100,7 @@ router.post('/shop', (req, res) => {
 
     Products.find(findArgs)
             .populate('brand')
-            .populate('conditions')
+            .populate('condition')
             .sort([[sortBy,order]])
             .skip(skip)
             .limit(limit)

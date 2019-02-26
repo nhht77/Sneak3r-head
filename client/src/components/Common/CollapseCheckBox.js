@@ -8,6 +8,8 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 class CollapseCheckBox extends Component {
@@ -37,10 +39,17 @@ class CollapseCheckBox extends Component {
       !isEmpty(this.props.lists)
       ? this.props.lists.map((value)=>(
         <ListItem style={{padding:"0", paddingBottom:"11px"}} key={value._id}>
-          <ListItemText primary={value.name}/>
-          <Checkbox 
-              checked={this.state.checked.indexOf(value._id) !== -1}
-              onChange={this.onCheck(value._id)}/>
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.checked.indexOf(value._id) !== -1}
+                onChange={this.onCheck(value._id)}/>}
+            label={value.name}
+            style={{
+                display: "flex",
+                width: "70%",
+                margin:"0"
+              }}/>
         </ListItem>))
       :null
   )
@@ -54,9 +63,11 @@ class CollapseCheckBox extends Component {
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+        <FormGroup>
           <List component="div" disablePadding>
           {this.renderList()}
           </List>
+        </FormGroup>
         </Collapse>
       </List>
       </div>
