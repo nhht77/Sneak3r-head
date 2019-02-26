@@ -20,13 +20,6 @@ class CollapseCheckBox extends Component {
         }
     }
 
-    componentDidMount = () => {
-      if(!isEmpty(this.props.lists)){
-        console.log(this.props.lists)
-      }
-    }
-    
-    
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
     };
@@ -38,16 +31,14 @@ class CollapseCheckBox extends Component {
 
       currentIndex === -1 ? newChecked = [...newChecked, id] : newChecked = newChecked.slice(1, currentIndex);
       this.setState({checked:newChecked})
-      console.log(this.state.checked)
     }
 
     renderList = () => (
-      this.state.isData 
+      !isEmpty(this.props.lists)
       ? this.props.lists.map((value)=>(
-        <ListItem key={value._id} style={{padding:'10px 0'}}>
+        <ListItem style={{padding:"0", paddingBottom:"11px"}} key={value._id}>
           <ListItemText primary={value.name}/>
           <Checkbox 
-              value={value._id}
               checked={this.state.checked.indexOf(value._id) !== -1}
               onChange={this.onCheck(value._id)}/>
         </ListItem>))
@@ -62,7 +53,6 @@ class CollapseCheckBox extends Component {
           <ListItemText inset className="collapse-title" primary={this.props.name} />
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
           {this.renderList()}

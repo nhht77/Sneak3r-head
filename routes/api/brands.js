@@ -12,15 +12,15 @@ const validateBrandsInput = require('../../validation/brands');
 router.get('/test', (req, res) => res.send({ msg: 'Brands Test Routes Works'}));
 
 
-// @route   GET api/brands/test
+// @route   GET api/brands
 // @desc    Get all brands route
 // @access  Public
 router.get('/', (req, res) => {
-    Brands.find({}).then((err, brands) => {
-        if(err) return res.status(400).json(err);
-        res.status(200).json(brands);
+    Brands.find({}).then( (err, brands) => {
+        if(err) res.json(err);
+        res.json(brands);
     })
-});
+}); 
 
 // @route   POST api/brands/test
 // @desc    Post all brands route

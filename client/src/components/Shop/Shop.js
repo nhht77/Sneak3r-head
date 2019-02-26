@@ -5,6 +5,7 @@ import PageTop from "../Common/PageTop";
 import CollapseCheckBox from "../Common/CollapseCheckBox";
 
 import { getProductBrand, getProductCondition } from "../../actions/productAction";
+import { price, sizes } from "../../utils/dummyData";
 
 
 class Shop extends Component {
@@ -12,6 +13,7 @@ class Shop extends Component {
     componentDidMount = () => {
       this.props.getProductBrand();
       this.props.getProductCondition();
+      console.log(this.props.conditions);
     }
     
     
@@ -25,6 +27,18 @@ class Shop extends Component {
               <CollapseCheckBox 
                 name="Brands"
                 lists={this.props.brands}
+                onFilter={() => {}}/>
+              <CollapseCheckBox 
+                name="Size"
+                lists={sizes}
+                onFilter={() => {}}/>
+              <CollapseCheckBox 
+                name="Prices"
+                lists={price}
+                onFilter={() => {}}/>
+              <CollapseCheckBox 
+                name="Conditions"
+                lists={this.props.conditions}
                 onFilter={() => {}}/>
             </div>
             <div className="right">
