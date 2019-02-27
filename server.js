@@ -8,7 +8,7 @@ const db        = require('./config/keys').mongoURI;
 const users     = require('./routes/api/users');
 const brands     = require('./routes/api/brands');
 const products     = require('./routes/api/products');
-const conditions  = require('./routes/api/conditions');
+const conditions = require('./routes/api/conditions');
 
 const PORT = process.env.PORT || 3000;
 
