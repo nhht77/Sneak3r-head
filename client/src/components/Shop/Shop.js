@@ -33,7 +33,11 @@ class Shop extends Component {
       this.props.getProductToShop(this.state.skip, this.state.limit, this.state.filters);
     }
     
-    
+    getMoreItems = () => {
+      let skip = this.state.skip + this.state.limit;
+      this.props.getProductToShop(skip, this.state.limit, this.state.filters);
+      this.setState({skip});
+    }
   render() {
     return (
       <div>
@@ -63,13 +67,12 @@ class Shop extends Component {
                   <div className="shop-grids clear">grids</div>
               </div>
               <div>
-              <GetMoreCard
-                grid={this.state.grid}
-                limit={this.state.limit}
-                size={this.props.products.bySize}
-                products={this.props.products.byShop}
-                loadMore={()=> this.loadMoreCards()}
-              />
+                <GetMoreCard
+                  grid={this.state.grid}
+                  limit={this.state.limit}
+                  size={this.props.products.bySize}
+                  products={this.props.products.byShop}
+                  getMoreItems={this.getMoreItems}/>
               </div>
             </div>
             </div>

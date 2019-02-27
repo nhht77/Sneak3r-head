@@ -6,9 +6,7 @@ const CardGroupShop = ({products, grid}) => {
 
     const cardGenerator = () => (
         products
-        ? products.map( p => (
-            <Card key={p._id} product={p} grid={grid} />
-        ))
+        ? products.map( p => ( <Card key={p._id} product={p} grid={grid}/> ))
         : <Spinner/>
     )
     

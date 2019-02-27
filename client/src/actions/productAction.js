@@ -72,12 +72,14 @@ export const getProductCondition = () => dispatch => {
          )
 }
 
-export const getProductToShop = (skip, limit, filters) => dispatch => {
+export const getProductToShop = (skip, limit, filters, prevState=[]) => dispatch => {
     axios.post('/api/products/shop', {skip, limit, filters})
          .then(res => {
+            let newState = [ ...prevState, ...res.data.products]
+            let payload  = {size: res.data.size, products: newState}
              dispatch({
                  type:GET_PRODUCT_TO_SHOP,
-                 payload:res.data
+                 payload
              })
          })
          .catch( err => {
