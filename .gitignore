@@ -1,5 +1,3 @@
 /node_modules
 /client/node_modules
 /config/keys_dev.js
-npm-debug.log
-.DS_Store
