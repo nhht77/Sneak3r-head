@@ -31,13 +31,14 @@ app.use('/api/products', products);
 app.use('/api/conditions', conditions);
 
 // Server static assets if in production
-// if (process.env.NODE_ENV === 'production') {
-// Set static folder
-app.use(express.static('client/build'));
+if (process.env.NODE_ENV === 'production') {
+// ... other app.use middleware 
+app.use(express.static(path.join(__dirname, "client", "build")))
 
-app.get('*', (req, res) => {
-res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
-// }
+}
 
-app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`));
+app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
