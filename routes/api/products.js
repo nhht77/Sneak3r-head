@@ -54,6 +54,8 @@ router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
             if(typeof req.body.colors !== "undefined"){
                 newProduct.colors = req.body.colors.split(",");    
             }
+
+            // if(req.body.prizes) newProduct.prizes = parseInt(req.body.prices);
             
             newProduct.save()
             .then(product => res.json(product))
