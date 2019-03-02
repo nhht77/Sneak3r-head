@@ -86,6 +86,30 @@ class AddProduct extends Component {
                     options={brands}
                     onChange={this.onChange}
                     error = {errors.brand}/>
+                    
+                <SelectListGroup 
+                    label="Condition"
+                    name="condition"
+                    value={this.state.condition}
+                    options={conditions}
+                    onChange={this.onChange}
+                    error = {errors.condition}/>
+
+                <SelectListGroup 
+                    label="Available"
+                    name="available"
+                    value={this.state.available}
+                    options={[true, false]}
+                    onChange={this.onChange}
+                    error = {errors.available}/>
+                
+                <SelectListGroup 
+                    label="Shipping"
+                    name="shipping"
+                    value={this.state.shipping}
+                    options={[true, false]}
+                    onChange={this.onChange}
+                    error = {errors.shipping}/>
 
 
                 <button>Add Product</button>
