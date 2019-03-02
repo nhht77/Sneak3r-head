@@ -45,7 +45,16 @@ router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
             errors.name = "This product is already registered";
             return res.status(400).json(errors);
         } else {
-            const newProduct  = new Products(req.body)
+            const newProduct  = new Products(req.body);
+
+            if(typeof req.body.sizes !== "undefined"){
+                newProduct.sizes = req.body.sizes.split(",");    
+            }
+            
+            if(typeof req.body.colors !== "undefined"){
+                newProduct.colors = req.body.colors.split(",");    
+            }
+            
             newProduct.save()
             .then(product => res.json(product))
             .catch(err => console.log(err))
