@@ -18,8 +18,8 @@ class AddProduct extends Component {
             brand:"",
             available:null,
             shipping:null,
-            colors:[],
-            sizes:[],
+            colors:"",
+            sizes:"",
             img:"",
             errors:{}
         }
@@ -27,7 +27,32 @@ class AddProduct extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state)
+        const newProduct = {
+            name:this.state.name,
+            description:this.state.description,
+            price:this.state.price,
+            condition:this.state.condition,
+            brand:this.state.brand,
+            available:this.state.available,
+            shipping:this.state.shipping,
+            colors:this.state.colors,
+            sizes:this.state.sizes,
+        }
+
+        console.log(newProduct);
+        this.setState({
+            name:"",
+            description:"",
+            price:null,
+            condition:"",
+            brand:"",
+            available:null,
+            shipping:null,
+            colors:"",
+            sizes:"",
+            img:"",
+            errors:{}
+        })
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
@@ -62,6 +87,7 @@ class AddProduct extends Component {
                     onChange={this.onChange}
                     type="text"
                     error = {errors.name}/>
+
                 <TextFieldGroup 
                     label="Description"
                     name="description"
@@ -69,6 +95,7 @@ class AddProduct extends Component {
                     onChange={this.onChange}
                     type="text"
                     error = {errors.description}/>
+                    
                 <TextFieldGroup 
                     label="Price"
                     name="price"
@@ -111,6 +138,23 @@ class AddProduct extends Component {
                     onChange={this.onChange}
                     error = {errors.shipping}/>
 
+                <div className="form-devider"></div>
+
+                <TextFieldGroup 
+                    label="Colors"
+                    name="colors"
+                    value={this.state.colors}
+                    onChange={this.onChange}
+                    type="text"
+                    error = {errors.colors}/>
+                    
+                <TextFieldGroup 
+                    label="Sizes"
+                    name="sizes"
+                    value={this.state.sizes}
+                    onChange={this.onChange}
+                    type="text"
+                    error = {errors.sizes}/>
 
                 <button>Add Product</button>
             </form>
