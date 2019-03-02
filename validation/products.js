@@ -25,6 +25,7 @@ module.exports = function validateProductInput(data){
     data.description = !isEmpty(data.description) ? data.description : '';
     data.price = !isEmpty(data.price) ? data.price : '';
     data.brand = !isEmpty(data.brand) ? data.brand : '';
+    data.condition = !isEmpty(data.condition) ? data.condition : '';
     // testData.colors = !isEmpty(testData.colors) ? testData.colors : '';
     // data.sizes = !isEmpty(data.sizes) ? data.sizes : '';
 
@@ -42,6 +43,10 @@ module.exports = function validateProductInput(data){
 
     if(Validator.isEmpty(data.brand)){
         errors.brand = "Product brand field is required"
+    }
+    
+    if(Validator.isEmpty(data.condition)){
+        errors.condition = "Product condition field is required"
     }
 
     // if(Validator.isEmpty(testData.colors)){

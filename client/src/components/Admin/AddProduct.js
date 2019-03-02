@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Sidebar from "../Common/Sidebar";
 import TextFieldGroup from "../Common/TextFieldGroup";
+import SelectListGroup from "../Common/SelectListGroup";
 
 import { getProductBrand, getProductCondition } from "../../actions/productAction";
 import isEmpty from "../../utils/is-empty";
@@ -42,8 +43,8 @@ class AddProduct extends Component {
   render() {
 
       const {errors, conditions, brands} = this.props;
-      let condition = !isEmpty(conditions) ? condition = conditions : condition = null;
-      let brand = !isEmpty(brands) ? brand = brands : brand = null;
+    //   let condition = !isEmpty(conditions) ? condition = conditions : condition = null;
+    //   let brand = !isEmpty(brands) ? brand = brands : brand = null;
 
     return (
         <div className="container">
@@ -77,6 +78,14 @@ class AddProduct extends Component {
                     error = {errors.price}/>
 
                 <div className="form-devider"></div>
+                
+                <SelectListGroup 
+                    label="Brand"
+                    name="brand"
+                    value={this.state.brand}
+                    options={brands}
+                    onChange={this.onChange}
+                    error = {errors.brand}/>
 
 
                 <button>Add Product</button>
