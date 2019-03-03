@@ -4,7 +4,8 @@ import {
     GET_PRODUCTS_BY_SELL,
     GET_PRODUCT_BRANDS,
     GET_PRODUCT_CONDITIONS,
-    GET_PRODUCT_TO_SHOP
+    GET_PRODUCT_TO_SHOP,
+    GET_ERRORS
  } 
     from "./types";
 
@@ -89,3 +90,15 @@ export const getProductToShop = (skip, limit, filters, prevState=[]) => dispatch
             })
         })
 }
+
+export const addProduct = (productData, history) => dispatch => {
+    axios
+      .post('/api/products', productData)
+      .then(res => history.push('/'))
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  };

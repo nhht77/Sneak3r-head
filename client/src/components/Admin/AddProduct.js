@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import Sidebar from "../Common/Sidebar";
 import TextFieldGroup from "../Common/TextFieldGroup";
 import SelectListGroup from "../Common/SelectListGroup";
 
-import { getProductBrand, getProductCondition } from "../../actions/productAction";
-import isEmpty from "../../utils/is-empty";
+import { getProductBrand, getProductCondition, addProduct } from "../../actions/productAction";
 
 class AddProduct extends Component {
     constructor(){
@@ -40,18 +40,10 @@ class AddProduct extends Component {
         }
 
         console.log(newProduct);
+        this.props.addProduct(newProduct, this.props.history)
         this.setState({
-            name:"",
-            description:"",
-            price:null,
-            condition:"",
-            brand:"",
-            available:null,
-            shipping:null,
-            colors:"",
-            sizes:"",
-            img:"",
-            errors:{}
+            name:"", description:"", price:null, condition:"", brand:"",
+            available:null, shipping:null, colors:"", sizes:"", img:"", errors:{} 
         })
     }
 
@@ -60,16 +52,11 @@ class AddProduct extends Component {
     componentDidMount = () => {
       this.props.getProductBrand();
       this.props.getProductCondition();
-      !isEmpty(this.props.conditions) ? console.log(this.props.conditions) : console.log("There is no conditions yet!");
-      !isEmpty(this.props.brands) ? console.log(this.props.brands) : console.log("There is no brands yet!");
     }
-    
     
   render() {
 
       const {errors, conditions, brands} = this.props;
-    //   let condition = !isEmpty(conditions) ? condition = conditions : condition = null;
-    //   let brand = !isEmpty(brands) ? brand = brands : brand = null;
 
     return (
         <div className="container">
@@ -174,4 +161,4 @@ const mapStatetoProps = state => ({
     conditions: state.condition
 })
 
-export default connect(mapStatetoProps, { getProductBrand, getProductCondition })(AddProduct);
+export default connect(mapStatetoProps, { getProductBrand, getProductCondition, addProduct })(withRouter(AddProduct));
