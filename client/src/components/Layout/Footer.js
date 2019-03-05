@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone } from '@fortawesome/free-solid-svg-icons'
-import { faCompass } from '@fortawesome/free-solid-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faCompass, faEnvelope, faClock } from '@fortawesome/free-solid-svg-icons'
 
 export class Footer extends Component {
   render() {

@@ -900,19 +900,23 @@ body {
     height: 10rem;
     padding: .625rem;
     box-sizing: border-box;
+    outline: none;
   }
   
   .dropzone-box  .wrap {
     background: #eaeaea;
     height: 100%;
     text-align: center;
-    padding-top: 2rem;
+    padding: .5rem;
+    width: 145%;
     box-sizing: border-box;
     font-size: 3.0625rem;
     background-size: contain !important;
     background-position: center center !important;
     border: 1px solid #eaeaea;
   }
+
+  
 
   /*=============================
          MOBILE - 576PX

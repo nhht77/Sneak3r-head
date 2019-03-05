@@ -2,7 +2,7 @@ import React from 'react';
 import isEmpty from "../../utils/is-empty";
 
 export const SelectListGroup = ({label, name, value, options, error, onChange}) => {
-  const option = !isEmpty(options) ? options.map( item => <option key={item._id} value={item.name}>{item.name}</option>) : null
+  const option = !isEmpty(options) ? options.map( item => <option key={item._id} value={item.name}>{JSON.stringify(item.name)}</option>) : null
     
   return (
     <div className="form-group">

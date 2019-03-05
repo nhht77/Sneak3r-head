@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Sidebar from "../Common/Sidebar";
 import TextFieldGroup from "../Common/TextFieldGroup";
 import SelectListGroup from "../Common/SelectListGroup";
+import UploadFile from "../Common/UploadFile";
 
 import { getProductBrand, getProductCondition, addProduct } from "../../actions/productAction";
 
@@ -20,7 +21,7 @@ class AddProduct extends Component {
             shipping:null,
             colors:"",
             sizes:"",
-            img:"",
+            img:[],
             errors:{}
         }
     }
@@ -67,6 +68,9 @@ class AddProduct extends Component {
             
             <h1>Add product</h1>
             <form onSubmit={this.onSubmit}>
+
+                <UploadFile/>
+                
                 <TextFieldGroup 
                     label="Name"
                     name="name"
@@ -113,7 +117,7 @@ class AddProduct extends Component {
                     label="Available"
                     name="available"
                     value={this.state.available}
-                    options={[true, false]}
+                    options={[{_id:1, name:true}, {_id:2, name:false}]}
                     onChange={this.onChange}
                     error = {errors.available}/>
                 
@@ -121,7 +125,7 @@ class AddProduct extends Component {
                     label="Shipping"
                     name="shipping"
                     value={this.state.shipping}
-                    options={[true, false]}
+                    options={[{_id:1, name:true}, {_id:2, name:false}]}
                     onChange={this.onChange}
                     error = {errors.shipping}/>
 
