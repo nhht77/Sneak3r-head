@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-// import axios from 'axios';
+import axios from 'axios';
 // import isEmpty from "../../utils/is-empty";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,15 +19,25 @@ class UploadFile extends Component {
 
     }
 
-    onDrop = img => {
-        console.log(img);
+    onDrop = imgs => {
+
+        let formData = new FormData();
+        const config = { header: {'content-type':'multipart/form-data'} }
+        formData.append("img",imgs[0]);
+    
+        axios.post('/api/products/upload',formData,config)
+        .then(res => {
+            this.setState({ imgs:[...this.state.imgs, res.data] })
+            console.log(this.state.imgs);
+            this.props.onImgDisplay(this.state.imgs);
+        })
     }
     
   render() {
     return (
     <section>
     <div className="dropzone clear">
-        <Dropzone className="dropzone-box" onDrop={acceptedFiles => console.log(acceptedFiles)}>
+        <Dropzone className="dropzone-box" onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
             <div className="dropzone-box" {...getRootProps()}>
                 <input {...getInputProps()} />
