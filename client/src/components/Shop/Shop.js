@@ -6,7 +6,7 @@ import CollapseCheckBox from "../Common/CollapseCheckBox";
 import CollapseRadio from "../Common/CollapseRadio";
 
 import { getProductBrand, getProductCondition, getProductToShop } from "../../actions/productAction";
-import { price, sizes } from "../../utils/dummyData";
+import { prices, sizes } from "../../utils/dummyData";
 import  GetMoreCard from '../Common/Card/GetMoreCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTh } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +22,7 @@ class Shop extends Component {
         filters:{
           Brands:[],
           Sizes:[],
-          Prizes:[],
+          Prices:[],
           Conditions:[]
         }
       }
@@ -40,7 +40,32 @@ class Shop extends Component {
       this.setState({skip});
     }
 
-    handleGrid = () => this.setState({grid: !this.state.grid ? 'grid-bars':'' })
+    handleGrid  = ()  => this.setState({grid: !this.state.grid ? 'grid-bars':'' })
+
+    handlePrice = val => {
+      let array = [];
+
+      for(let key in prices){
+        if(prices[key]._id === parseInt(val, 10)){
+          array = prices[key].array;
+        }
+      }
+      
+      return array;
+    }
+
+    onFilter = (filters, category) => {
+      const newFilters = {...this.state.filters}
+      newFilters[category] = filters;
+
+      if(category === "Prices"){
+        let priceValues = this.handlePrice(filters);
+        newFilters[category] = priceValues;
+      }
+
+      this.props.getProductToShop(0, this.state.limit, newFilters);
+      this.setState({skip: 0, filters: newFilters}, () => console.log(this.state.filters));
+    }
 
   render() {
     return (
@@ -52,27 +77,29 @@ class Shop extends Component {
               <CollapseCheckBox 
                 name="Brands"
                 lists={this.props.brands}
-                onFilter={() => {}}/>
+                onFilter={filter => this.onFilter(filter, "brand")}/>
               <CollapseCheckBox 
                 name="Sizes"
                 lists={sizes}
-                onFilter={() => {}}/>
+                onFilter={filter => this.onFilter(filter, "sizes")}/>
               <CollapseRadio 
                 name="Prices"
-                lists={price}
-                onFilter={() => {}}/>
+                lists={prices}
+                onFilter={filter => this.onFilter(filter, "Prices")}/>
               <CollapseCheckBox 
                 name="Conditions"
                 lists={this.props.conditions}
-                onFilter={() => {}}/>
+                onFilter={filter => this.onFilter(filter, "condition")}/>
             </div>
             <div className="right">
               <div className="shop-options">
                   <div className="shop-grids clear">
                   <div className={`grid-btn ${this.state.grid ? '' : 'active'}`}
-                       onClick={this.handleGrid} > <FontAwesomeIcon icon={faTh}/> </div>
+                       onClick={this.handleGrid} > <FontAwesomeIcon icon={faTh}/> 
+                  </div>
                   <div className={`grid-btn ${!this.state.grid ? '' : 'active'}`}
-                       onClick={()=> this.handleGrid()} > <FontAwesomeIcon icon={faBars}/> </div>
+                       onClick={()=> this.handleGrid()} > <FontAwesomeIcon icon={faBars}/>
+                  </div>
                   </div>
               </div>
               <div>

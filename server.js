@@ -16,7 +16,7 @@ const app  = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+console.log(db);
 mongoose.connect(db, { useNewUrlParser: true })
         .then(() => console.log('DB Connected'))
         .catch(err => console.log(err));

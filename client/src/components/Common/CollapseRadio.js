@@ -33,7 +33,11 @@ class CollapseRadio extends Component {
       this.setState({checked:newChecked})
     }
 
-    onChange = e => this.setState({value: e.target.value});
+    onChange = e => {
+      this.setState({value: e.target.value})
+      this.props.onFilter(e.target.value)
+      console.log(e.target.value);
+    };
 
     renderList = () => (
       !isEmpty(this.props.lists)

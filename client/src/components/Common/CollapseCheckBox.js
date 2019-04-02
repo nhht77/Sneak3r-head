@@ -33,6 +33,7 @@ class CollapseCheckBox extends Component {
 
       currentIndex === -1 ? newChecked = [...newChecked, id] : newChecked = newChecked.slice(1, currentIndex);
       this.setState({checked:newChecked})
+      this.props.onFilter(newChecked);
     }
 
     renderList = () => (
@@ -44,12 +45,8 @@ class CollapseCheckBox extends Component {
               <Checkbox 
                 checked={this.state.checked.indexOf(value._id) !== -1}
                 onChange={this.onCheck(value._id)}/>}
-            label={value.name}
-            style={{
-                display: "flex",
-                width: "70%",
-                margin:"0"
-              }}/>
+                label={value.name}
+                style={{ display: "flex", width: "70%", margin:"0"}}/>
         </ListItem>))
       :null
   )

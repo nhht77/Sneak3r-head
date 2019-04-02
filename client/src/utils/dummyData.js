@@ -41,7 +41,7 @@ export const sizes = [
     },
 ]
 
-export const price = [
+export const prices = [
     {
         "_id":0,
         "name":"Any",
