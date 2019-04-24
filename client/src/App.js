@@ -18,6 +18,7 @@ import Login from './components/Auth/Login';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import Shop from './components/Shop/Shop.js';
 import AddProduct from './components/Admin/AddProduct.js';
+import ProductDetail from './components/Product/ProductDetail.js';
 
 if(localStorage.jwtToken){
   let token = localStorage.jwtToken;
@@ -51,6 +52,7 @@ class App extends Component {
               <Route exact path='/register' component={Register}/>
               <Route exact path='/login' component={Login}/>
               <Route exact path='/shop' component={Shop}/>
+              <Route exact path='/product_detail/:id' component={ProductDetail}/>
               <Switch>
                 <PrivateRoute exact path='/user/dashboard' component={Dashboard}/>
               </Switch>

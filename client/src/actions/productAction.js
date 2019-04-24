@@ -5,6 +5,7 @@ import {
     GET_PRODUCT_BRANDS,
     GET_PRODUCT_CONDITIONS,
     GET_PRODUCT_TO_SHOP,
+    GET_PRODUCT_BY_ID,
     GET_ERRORS
  } 
     from "./types";
@@ -89,6 +90,16 @@ export const getProductToShop = (skip, limit, filters, prevState=[]) => dispatch
                 payload:null
             })
         })
+}
+
+export const getProductById = id => dispatch => {
+    axios.get(`/api/products/${id}`)
+         .then( res => {
+             dispatch({
+                 type:GET_PRODUCT_BY_ID,
+                 payload: res.data[0]
+             })
+         })
 }
 
 export const addProduct = (productData, history) => dispatch => {

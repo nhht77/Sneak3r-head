@@ -123,7 +123,6 @@ router.post('/shop', (req, res) => {
 // @desc    Get product by id
 // @access  Public
 router.get('/:id',(req,res)=>{
-
     Products
     .find({ '_id':req.params.id})
     .populate('brand')

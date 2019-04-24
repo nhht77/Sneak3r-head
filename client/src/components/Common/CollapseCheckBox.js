@@ -32,7 +32,7 @@ class CollapseCheckBox extends Component {
       const currentIndex = checked.indexOf(id);
 
       currentIndex === -1 ? newChecked = [...newChecked, id] : newChecked = newChecked.slice(1, currentIndex);
-      this.setState({checked:newChecked})
+      this.setState({checked:newChecked});
       this.props.onFilter(newChecked);
     }
 

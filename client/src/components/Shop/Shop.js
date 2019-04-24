@@ -36,21 +36,16 @@ class Shop extends Component {
     
     getMoreItems = () => {
       let skip = this.state.skip + this.state.limit;
-      this.props.getProductToShop(skip, this.state.limit, this.state.filters);
-      this.setState({skip});
+      this.props.getProductToShop(skip, this.state.limit, this.state.filters, this.props.products.byShop)
+          // .then(this.setState(skip))
+          
     }
 
     handleGrid  = ()  => this.setState({grid: !this.state.grid ? 'grid-bars':'' })
 
     handlePrice = val => {
       let array = [];
-
-      for(let key in prices){
-        if(prices[key]._id === parseInt(val, 10)){
-          array = prices[key].array;
-        }
-      }
-      
+      for (let key in prices) { if(prices[key]._id === parseInt(val, 10)) array = prices[key].array }
       return array;
     }
 
@@ -81,7 +76,7 @@ class Shop extends Component {
               <CollapseCheckBox 
                 name="Sizes"
                 lists={sizes}
-                onFilter={filter => this.onFilter(filter, "sizes")}/>
+                onFilter={filter => this.onFilter(filter, "Sizes")}/>
               <CollapseRadio 
                 name="Prices"
                 lists={prices}
