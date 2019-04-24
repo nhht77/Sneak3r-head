@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/productAction";
+import Spinner from "../Common/Spinner";
+
+import PageTop from "../Common/PageTop";
 
 class ProductDetail extends Component {
     
@@ -10,12 +13,31 @@ class ProductDetail extends Component {
     }
 
     render() {
+        console.log(this.props.product.byId)
     return (
       <div>
-        
+      <PageTop title="Product detail"/>
+      <div className="container">
+      {
+          this.props.product.byId 
+          ?  
+          <div className="product-detail-wrapper">
+            <div className="left">
+                <h1>This is product detail {this.props.product.name}</h1>
+            </div>
+            <div className="right">
+          
+            </div>
+          </div>
+          : <Spinner/>
+
+      }
+      </div>
       </div>
     )
   }
 }
 
-export default connect(null, { getProductById })(ProductDetail);
+const mapStateToProps = state => ({ product: state.product})
+
+export default connect(mapStateToProps, { getProductById })(ProductDetail);
