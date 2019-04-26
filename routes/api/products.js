@@ -132,4 +132,13 @@ router.get('/:id',(req,res)=>{
 });
 
 
+// @route   GET api/products/upload
+// @desc    Post product image
+// @access  Private
+router.post('/upload', (req, res) => {
+    console.log(res);
+    return res;
+})
+
+
 module.exports = router;

@@ -2,22 +2,30 @@ const express    = require('express');
 const mongoose   = require('mongoose');
 const bodyParser = require('body-parser');
 const passport   = require('passport');
+const cloudinary = require('cloudinary');
 const path = require("path")
 
-const db           = require('./config/keys').mongoURI;
 const users        = require('./routes/api/users');
 const brands       = require('./routes/api/brands');
 const products     = require('./routes/api/products');
 const conditions   = require('./routes/api/conditions');
 
+require('dotenv').config();
 const PORT = process.env.PORT || 3000;
-
 const app  = express();
+
+cloudinary.config({
+        cloud_name: process.env.CLOUD_NAME,
+        api_key: process.env.CLOUD_API_KEY,
+        api_secret: process.env.CLOUD_API_SECRET,
+});
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-console.log(db);
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGO_URI, {
+        useCreateIndex: true,
+        useNewUrlParser: true
+      })
         .then(() => console.log('DB Connected'))
         .catch(err => console.log(err));
 
