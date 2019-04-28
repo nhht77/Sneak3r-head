@@ -1,11 +1,25 @@
-const express  = require('express');
-const passport = require('passport');
-const mongoose = require('mongoose');
-const router   = express.Router();
+const express    = require('express');
+const passport   = require('passport');
+const mongoose   = require('mongoose');
+const multer     = require('multer');
+const cloudinary = require('cloudinary');
+const formidable = require('express-formidable');
+const router     = express.Router();
 
-const Products = require('../../models/Products');
-
+const Products   = require('../../models/Products');
 const validateProductInput = require('../../validation/products');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, 'uploads/');
+    },
+    filename: function (req, file, callback) {
+      callback(null, `${file.originalname}`);
+    }
+});
+
+const upload = multer({storage }).array('img',2);
+
 
 // @route   GET api/products/ids
 // @desc    Get products by array of ids route
@@ -135,9 +149,11 @@ router.get('/:id',(req,res)=>{
 // @route   GET api/products/upload
 // @desc    Post product image
 // @access  Private
-router.post('/upload', (req, res) => {
-    console.log(res);
-    return res;
+router.post('/upload', formidable, upload, (req, res) => {
+    console.log(req.files);
+    cloudinary.uploader.upload(req.files.file.path, (result) => {
+        console.log(result)
+    })
 })
 
 

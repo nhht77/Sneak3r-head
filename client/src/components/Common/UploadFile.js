@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dropzone, { useDropZone } from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import axios from 'axios';
 // import isEmpty from "../../utils/is-empty";
 
@@ -21,17 +21,16 @@ class UploadFile extends Component {
 
     onDrop = imgs => {
         let formData = new FormData();
-        console.log(imgs);
         const config = { header: {'content-type':'multipart/form-data'} }
-        formData.append(imgs[0].name, imgs[0]);
+        formData.append("img", imgs[0]);
     
         // config?
         axios.post('/api/products/upload',formData,config)
         .then(res => {
-            console.log(res);
-            // this.setState({ imgs:[...this.state.imgs, res.data] })
-            // console.log(this.state.imgs);
-            // this.props.onImgDisplay(this.state.imgs);
+            console.log(res.data);
+            this.setState({ imgs:[...this.state.imgs, res.data] })
+            console.log(this.state.imgs);
+            this.props.onImgDisplay(this.state.imgs);
         })
     }
     
