@@ -11,11 +11,11 @@ const Products   = require('../../models/Products');
 const validateProductInput = require('../../validation/products');
 
 let storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'uploads/')
+    destination:(req,file,callback)=>{
+        callback(null,'uploads/')
     },
-    filename:(req,file,cb)=>{
-        cb(null,`${Date.now()}_${file.originalname}`)
+    filename:(req,file,callback)=>{
+        callback(null,`${Date.now()}_${file.originalname}`)
     }//,
     // fileFilter:(req,file,cb)=>{
 
@@ -33,7 +33,13 @@ const upload = multer({storage:storage }).single('file')
 // @desc    Post product image
 // @access  Private
 router.post('/upload', formidable(), (req, res) => {
-    res.send(req.files)
+    cloudinary.uploader.upload(req.files.image.path,(result)=>{
+        console.log(result);
+        res.status(200).send({
+            public_id: result.public_id,
+            url: result.url
+        })
+    })
     console.log('req.file : ' + req.files.image.path);
     
 })
