@@ -5,21 +5,38 @@ const multer     = require('multer');
 const cloudinary = require('cloudinary');
 const formidable = require('express-formidable');
 const router     = express.Router();
+const isEmpty    = require('../../validation/is-empty');
 
 const Products   = require('../../models/Products');
 const validateProductInput = require('../../validation/products');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, 'uploads/');
+let storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'uploads/')
     },
-    filename: function (req, file, callback) {
-      callback(null, `${file.originalname}`);
-    }
+    filename:(req,file,cb)=>{
+        cb(null,`${Date.now()}_${file.originalname}`)
+    }//,
+    // fileFilter:(req,file,cb)=>{
+
+    //     const ext = path.extname(file.originalname)
+    //     if(ext !== '.jpg' && ext !== '.png'){
+    //         return cb(res.status(400).end('only jpg, png is allowed'),false);
+    //     }
+
+    //     cb(null,true)
+    // }
 });
+const upload = multer({storage:storage }).single('file')
 
-const upload = multer({storage }).array('img',2);
-
+// @route   GET api/products/upload
+// @desc    Post product image
+// @access  Private
+router.post('/upload', formidable(), (req, res) => {
+    res.send(req.files)
+    console.log('req.file : ' + req.files.image.path);
+    
+})
 
 // @route   GET api/products/ids
 // @desc    Get products by array of ids route
@@ -146,15 +163,7 @@ router.get('/:id',(req,res)=>{
 });
 
 
-// @route   GET api/products/upload
-// @desc    Post product image
-// @access  Private
-router.post('/upload', formidable, upload, (req, res) => {
-    console.log(req.files);
-    cloudinary.uploader.upload(req.files.file.path, (result) => {
-        console.log(result)
-    })
-})
+
 
 
 module.exports = router;

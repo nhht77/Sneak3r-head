@@ -19,10 +19,10 @@ class UploadFile extends Component {
 
     }
 
-    onDrop = imgs => {
+    onDrop = files => {
         let formData = new FormData();
         const config = { header: {'content-type':'multipart/form-data'} }
-        formData.append("img", imgs[0]);
+        formData.append("file", files[0]);
     
         // config?
         axios.post('/api/products/upload',formData,config)
