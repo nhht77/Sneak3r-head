@@ -32,7 +32,7 @@ router.post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
         res.status(400).json(errors);
     }
 
-    if(req.user.role === 0 ){
+    if(req.user.role === 1 ){
         errors.authorization = "You are not authorized to have access to this information";
         res.status(401).json(req.user.role);
     }

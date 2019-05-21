@@ -1,11 +1,11 @@
 import React from 'react';
 import spinner from './spinner.gif';
 
-const Spinner = ({width}) => {
+const Spinner = ({width, src = spinner}) => {
     return (
         <div>
             <img
-                src={spinner}
+                src={src}
                 style={{ width: `{${width} ? ${width} :200px}`, margin: 'auto', display: 'block' }}
                 alt="Loading..."
             />

@@ -3,7 +3,8 @@ const mongoose   = require('mongoose');
 const bodyParser = require('body-parser');
 const passport   = require('passport');
 const cloudinary = require('cloudinary');
-const path = require("path")
+const path = require("path");
+const cors = require("cors");
 
 const users        = require('./routes/api/users');
 const brands       = require('./routes/api/brands');
@@ -22,6 +23,7 @@ cloudinary.config({
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors())
 mongoose.connect(process.env.MONGO_URI, {
         useCreateIndex: true,
         useNewUrlParser: true

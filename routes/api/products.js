@@ -10,13 +10,13 @@ const isEmpty    = require('../../validation/is-empty');
 const Products   = require('../../models/Products');
 const validateProductInput = require('../../validation/products');
 
-let storage = multer.diskStorage({
-    destination:(req,file,callback)=>{
-        callback(null,'uploads/')
-    },
-    filename:(req,file,callback)=>{
-        callback(null,`${Date.now()}_${file.originalname}`)
-    }//,
+// let storage = multer.diskStorage({
+    // destination:(req,file,callback)=>{
+        // callback(null,'uploads/')
+    // },
+    // filename:(req,file,callback)=>{
+        // callback(null,`${Date.now()}_${file.originalname}`)
+    // }//,
     // fileFilter:(req,file,cb)=>{
 
     //     const ext = path.extname(file.originalname)
@@ -26,23 +26,32 @@ let storage = multer.diskStorage({
 
     //     cb(null,true)
     // }
-});
-const upload = multer({storage:storage }).single('file')
+// });
 
-// @route   GET api/products/upload
+
+// const upload = multer({storage:storage }).single('file')
+
+// @route   POST api/products/upload
 // @desc    Post product image
 // @access  Private
-router.post('/upload', formidable(), (req, res) => {
-    cloudinary.uploader.upload(req.files.image.path,(result)=>{
-        console.log(result);
-        res.status(200).send({
-            public_id: result.public_id,
-            url: result.url
-        })
-    })
-    console.log('req.file : ' + req.files.image.path);
-    
+router.post('/upload', formidable(),(req,res)=>{
+  // if(req.user.role === 1 ){
+    // errors.authorization = "You are not authorized to have access to this information";
+    // res.status(401).json(req.user.role);
+  // }
+
+  cloudinary.uploader.upload(req.files.file.path,(result)=>{
+      console.log(result);
+      res.status(200).send({
+          public_id: result.public_id,
+          url: result.url
+      })
+  },{
+      public_id: `${Date.now()}`,
+      resource_type: 'auto'
+  })
 })
+
 
 // @route   GET api/products/ids
 // @desc    Get products by array of ids route

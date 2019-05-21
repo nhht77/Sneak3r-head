@@ -21,7 +21,7 @@ class AddProduct extends Component {
             shipping:"",
             colors:"",
             sizes:"",
-            img:[],
+            imgs:[],
             errors:{}
         }
     }
@@ -54,6 +54,11 @@ class AddProduct extends Component {
       this.props.getProductBrand();
       this.props.getProductCondition();
     }
+
+    onHandleImg = imgs => {
+        const newState = {...this.state};
+        newState['imgs'] = imgs
+    }
     
   render() {
 
@@ -69,8 +74,9 @@ class AddProduct extends Component {
             <h1>Add product</h1>
             <form onSubmit={this.onSubmit}>
 
-                <UploadFile/>
-                
+                <UploadFile onHandleImg={ imgs => this.onHandleImg(imgs)}/>
+                            {//**reset = this.state.formSuccess **/ 
+                            }
                 <TextFieldGroup 
                     label="Name"
                     name="name"
