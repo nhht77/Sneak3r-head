@@ -52,6 +52,14 @@ router.post('/upload', formidable(),(req,res)=>{
   })
 })
 
+router.get('/removeImg', (req,res) => {
+    let image_id = req.query.public_id;
+    cloudinary.uploader.destroy(image_id,(error,result)=>{
+        if(error) return res.json({succes:false,error});
+        res.status(200).send('ok');
+    })
+})
+
 
 // @route   GET api/products/ids
 // @desc    Get products by array of ids route
@@ -79,7 +87,8 @@ router.get('/ids', (req, res) => {
 // @route   POST api/products/
 // @desc    Post product route
 // @access  Private
-router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
+// passport.authenticate('jwt', {session:false})
+router.post('/', (req, res) => {
     const { errors, isValid } = validateProductInput(req.body);
 
     if(!isValid){
@@ -101,8 +110,6 @@ router.post('/', passport.authenticate('jwt', {session:false}) , (req, res) => {
                 newProduct.colors = req.body.colors.split(",");    
             }
 
-            // if(req.body.prizes) newProduct.prizes = parseInt(req.body.prices);
-            
             newProduct.save()
             .then(product => res.json(product))
             .catch(err => console.log(err))

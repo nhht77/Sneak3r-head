@@ -38,13 +38,16 @@ class AddProduct extends Component {
             shipping:this.state.shipping,
             colors:this.state.colors,
             sizes:this.state.sizes,
+            imgs:this.state.imgs
         }
+
+        console.log(this.state.imgs)
 
         console.log(newProduct);
         this.props.addProduct(newProduct, this.props.history)
         this.setState({
             name:"", description:"", price:null, condition:"", brand:"",
-            available:null, shipping:null, colors:"", sizes:"", img:"", errors:{} 
+            available:null, shipping:null, colors:"", sizes:"", imgs:[], errors:{} 
         })
     }
 
@@ -57,7 +60,10 @@ class AddProduct extends Component {
 
     onHandleImg = imgs => {
         const newState = {...this.state};
-        newState['imgs'] = imgs
+        newState['imgs'] = imgs;
+        this.setState(newState)
+        console.log(imgs)
+        console.log(newState)
     }
     
   render() {

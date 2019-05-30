@@ -21,7 +21,7 @@ class UploadFile extends Component {
         this.state.imgs.map( item => (
             <div className="dropzone-box"
                 key={item.public_id}
-                onClick={()=> this.onRemove(item.public_id)}>
+                onClick={ () => this.onRemove(item.public_id)}>
                 <div 
                     className="wrap"
                     style={{background:`url(${item.url}) no-repeat`}}>
@@ -49,6 +49,14 @@ class UploadFile extends Component {
             this.setState({ isUploading:false })
         })
         // .then( () => this.props.onHandleImg(this.state.imgs))
+    }
+
+    onRemove = (id) => {
+        axios.get(`/api/products/removeImg?public_id=${id}`).then( res => {
+            let imgs = this.state.imgs.filter(item => item.public_id !== id);
+            this.setState({imgs})
+            this.props.onHandleImg(this.state.imgs)
+        })
     }
     
   render() {
