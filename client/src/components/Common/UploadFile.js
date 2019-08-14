@@ -16,6 +16,15 @@ class UploadFile extends Component {
             isUploading:false
         }
     }  
+
+    // static getDerivedStateFromProps(props,state){
+    //     if(props.reset){
+    //         return state = {
+    //             uploadedFiles:[]
+    //         }
+    //     }
+    //     return null;
+    // }
     
     onDisplayUploadedImg = () => (
         this.state.imgs.map( item => (
@@ -54,8 +63,8 @@ class UploadFile extends Component {
     onRemove = (id) => {
         axios.get(`/api/products/removeImg?public_id=${id}`).then( res => {
             let imgs = this.state.imgs.filter(item => item.public_id !== id);
-            this.setState({imgs})
-            this.props.onHandleImg(this.state.imgs)
+            this.setState({imgs});
+            this.props.onHandleImg(this.state.imgs);
         })
     }
     

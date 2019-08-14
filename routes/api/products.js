@@ -10,27 +10,6 @@ const isEmpty    = require('../../validation/is-empty');
 const Products   = require('../../models/Products');
 const validateProductInput = require('../../validation/products');
 
-// let storage = multer.diskStorage({
-    // destination:(req,file,callback)=>{
-        // callback(null,'uploads/')
-    // },
-    // filename:(req,file,callback)=>{
-        // callback(null,`${Date.now()}_${file.originalname}`)
-    // }//,
-    // fileFilter:(req,file,cb)=>{
-
-    //     const ext = path.extname(file.originalname)
-    //     if(ext !== '.jpg' && ext !== '.png'){
-    //         return cb(res.status(400).end('only jpg, png is allowed'),false);
-    //     }
-
-    //     cb(null,true)
-    // }
-// });
-
-
-// const upload = multer({storage:storage }).single('file')
-
 // @route   POST api/products/upload
 // @desc    Post product image
 // @access  Private

@@ -41,9 +41,6 @@ class AddProduct extends Component {
             imgs:this.state.imgs
         }
 
-        console.log(this.state.imgs)
-
-        console.log(newProduct);
         this.props.addProduct(newProduct, this.props.history)
         this.setState({
             name:"", description:"", price:null, condition:"", brand:"",
