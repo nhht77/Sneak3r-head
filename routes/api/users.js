@@ -54,38 +54,43 @@ router.post('/register', (req, res) => {
 // @route   GET api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { isValid, errors } = validateLoginInput(req.body);
     
-    if(!isValid) {
-        return res.status(400).json(errors);
-    }
+    if(!isValid) return res.status(400).json(errors);
     
     const {email, password} = req.body;
 
-    User.findOne({email}).then( user => {	
+    try {
+        const user = await User.findOne({email})	
+    
         if(!user){	
             errors.email = "User is not found";	
             res.status(400).send(errors)	
         } 	
-
-         bcrypt.compare(password, user.password).then( isMatch => {	
-            if(isMatch){	
-                const {_id: id, firstname, lastname, email, password, role, cart, history } = user;	
-                const payload = {id, firstname, lastname, email, password, role, cart, history};	
-
-                 jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn:3600}, (err, token) => {	
-                    res.json({	
-                        success:true,	
-                        token: `bearer ${token}`	
-                    })	
+    
+        const isMatch = await bcrypt.compare(password, user.password);	
+        
+        if(isMatch){	
+            const {_id: id, firstname, lastname, email, password, role, cart, history } = user;	
+            const payload = {id, firstname, lastname, email, password, role, cart, history};	
+    
+                jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn:3600}, (err, token) => {	
+                res.json({	
+                    success:true,	
+                    token: `bearer ${token}`	
                 })	
-            } else {	
-                errors.password = "The password is not correct";	
-                res.status(400).send(errors);	
-            }	
-        })	
-    }).catch( err => console.log(err));	
+            })	
+        } else {	
+            errors.password = "The password is not correct";	
+            res.status(400).send(errors);	
+        }	
+
+    } catch (error) {
+        console.log(error)
+    }
+    
+	
 });
 
 

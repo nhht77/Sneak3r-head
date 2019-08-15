@@ -635,7 +635,7 @@ body {
   }
   
   .product-detail-wrapper .product-tags {
-    padding-bottom: .625rem;
+    padding: 1.625rem 0 .625rem;
     border-bottom: 1px solid #d3d3d3;
   }
   

@@ -4,6 +4,8 @@ import { getProductById } from "../../actions/productAction";
 import Spinner from "../Common/Spinner";
 
 import PageTop from "../Common/PageTop";
+import ProductImg from "./ProductImg";
+import ProductSpecs from "./ProductSpecs";
 
 class ProductDetail extends Component {
     
@@ -23,10 +25,16 @@ class ProductDetail extends Component {
           ?  
           <div className="product-detail-wrapper">
             <div className="left">
-                <h1>This is product detail {this.props.product.name}</h1>
+              <div style={{width:'500px'}}>
+                <ProductImg
+                    detail={this.props.product.byId}
+                />
+            </div>
             </div>
             <div className="right">
-          
+                <ProductSpecs
+                  addToCart={(id)=> this.addToCartHandler(id)}
+                  detail={this.props.product.byId}/>
             </div>
           </div>
           : <Spinner/>

@@ -3,13 +3,13 @@ const mongoose   = require('mongoose');
 const bodyParser = require('body-parser');
 const passport   = require('passport');
 const cloudinary = require('cloudinary');
-const path = require("path");
-const cors = require("cors");
+const path       = require("path");
+const cors       = require("cors");
 
-const users        = require('./routes/api/users');
-const brands       = require('./routes/api/brands');
-const products     = require('./routes/api/products');
-const conditions   = require('./routes/api/conditions');
+const users      = require('./routes/api/users');
+const brands     = require('./routes/api/brands');
+const products   = require('./routes/api/products');
+const conditions = require('./routes/api/conditions');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
@@ -23,7 +23,7 @@ cloudinary.config({
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 mongoose.connect(process.env.MONGO_URI, {
         useCreateIndex: true,
         useNewUrlParser: true
@@ -42,15 +42,12 @@ app.use('/api/conditions', conditions);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
-// Set static folder
-app.use(express.static('client/build'));
-
-app.get('*', (req, res) => {
-res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+        // Set static folder
+        app.use(express.static('client/build'));
+        
+        app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 }
 
-if (!module.parent)  {
-        app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
-
-}
+app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
