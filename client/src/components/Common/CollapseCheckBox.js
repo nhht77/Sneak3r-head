@@ -59,12 +59,15 @@ class CollapseCheckBox extends Component {
           <ListItemText inset className="collapse-title" primary={this.props.name} />
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+
         <FormGroup>
           <List component="div" disablePadding>
           {this.renderList()}
           </List>
         </FormGroup>
+        
         </Collapse>
       </List>
       </div>

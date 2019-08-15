@@ -44,7 +44,7 @@ class CollapseRadio extends Component {
       ? this.props.lists.map((value)=>(
         <FormControlLabel
             key={value._id}
-            value={`${value._id}`}
+            value={`${value.array}`}
             label={value.name}
             control={<Radio/>}
             style={{margin: '0'}}

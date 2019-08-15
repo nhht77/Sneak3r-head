@@ -56,6 +56,7 @@ class Shop extends Component {
       if(category === "Prices"){
         let priceValues = this.handlePrice(filters);
         newFilters[category] = priceValues;
+        console.log(priceValues);
       }
 
       this.props.getProductToShop(0, this.state.limit, newFilters);
