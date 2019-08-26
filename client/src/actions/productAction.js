@@ -103,13 +103,38 @@ export const getProductById = id => dispatch => {
 }
 
 export const addProduct = (productData, history) => dispatch => {
+
+    console.log(`\n productAction.js:`);
+    console.log(`\n ${JSON.stringify(productData)}`);
+
     axios
       .post('/api/products', productData)
-      .then(res => history.push('/'))
-      .catch(err =>
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data
+      .then(res => {
+            console.log(`\n productAction.js SUCCESS: `)
+            console.log(`\n ${JSON.stringify(productData)}`)
+
+            history.push('/')
         })
+      .catch(err => {
+            console.log(`\n productAction.js display error:`)
+            console.log(`\n ${JSON.stringify(err.response.data)}`)
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        }
       );
   };
+
+export const adminRemoveProductImage = id => dispatch => {
+    console.log(id)
+    // dispatch()
+}
+
+// (id) => {
+    // axios.get(`/api/products/removeImg?public_id=${id}`).then( res => {
+        // let imgs = this.state.imgs.filter(item => item.public_id !== id);
+        // this.setState({imgs});
+        // this.props.onHandleImg(this.state.imgs);
+    // })
+// }

@@ -622,9 +622,11 @@ body {
     margin-bottom: 8.75rem;
   }
   
-  .product-detail-wrapper .right{
-    flex-grow: 1; 
+  .product-detail-wrapper .right {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
     min-height: 50rem;
+    margin-top: 3rem;
   }
   
   
@@ -901,6 +903,7 @@ body {
     padding: .625rem;
     box-sizing: border-box;
     outline: none;
+    margin: 5px 40px;
   }
   
   .dropzone-box  .wrap {

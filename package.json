@@ -9,7 +9,7 @@
     "server-install": "npm install",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client"
+    "client": "yarn run start --prefix client"
   },
   "author": "",
   "license": "ISC",

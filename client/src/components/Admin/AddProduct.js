@@ -34,18 +34,27 @@ class AddProduct extends Component {
             price:this.state.price,
             condition:this.state.condition,
             brand:this.state.brand,
-            available:this.state.available,
-            shipping:this.state.shipping,
+            available:this.state.available === 'true',
+            shipping:this.state.shipping === 'true',
             colors:this.state.colors,
             sizes:this.state.sizes,
             imgs:this.state.imgs
         }
+
+        console.log("\n AddProduct.js: Submit()");
+        console.log(`\n AddProduct.js:`);
+        console.log(`\n ${JSON.stringify(newProduct)}`);
+        console.log(`\n shipping type: ${typeof newProduct.available}`);
+        console.log(`\n available type: ${typeof newProduct.shipping}`);
+        console.log(`\n brand type: ${typeof newProduct.brand}`);
+        console.log(`\n condition type: ${typeof newProduct.condition}`);
 
         this.props.addProduct(newProduct, this.props.history)
         this.setState({
             name:"", description:"", price:null, condition:"", brand:"",
             available:null, shipping:null, colors:"", sizes:"", imgs:[], errors:{} 
         })
+
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
@@ -59,8 +68,6 @@ class AddProduct extends Component {
         const newState = {...this.state};
         newState['imgs'] = imgs;
         this.setState(newState)
-        console.log(imgs)
-        console.log(newState)
     }
     
   render() {
@@ -78,8 +85,7 @@ class AddProduct extends Component {
             <form onSubmit={this.onSubmit}>
 
                 <UploadFile onHandleImg={ imgs => this.onHandleImg(imgs)}/>
-                            {//**reset = this.state.formSuccess **/ 
-                            }
+                            
                 <TextFieldGroup 
                     label="Name"
                     name="name"
@@ -128,7 +134,8 @@ class AddProduct extends Component {
                     value={this.state.available}
                     options={[{_id:1, name:true}, {_id:2, name:false}]}
                     onChange={this.onChange}
-                    error = {errors.available}/>
+                    error = {errors.available}
+                    isTrueFalse={true}/>
                 
                 <SelectListGroup 
                     label="Shipping"
@@ -136,7 +143,8 @@ class AddProduct extends Component {
                     value={this.state.shipping}
                     options={[{_id:1, name:true}, {_id:2, name:false}]}
                     onChange={this.onChange}
-                    error = {errors.shipping}/>
+                    error = {errors.shipping}
+                    isTrueFalse={true}/>
 
                 <div className="form-devider"></div>
 

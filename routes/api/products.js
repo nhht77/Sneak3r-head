@@ -20,7 +20,7 @@ router.post('/upload', formidable(),(req,res)=>{
   // }
 
   cloudinary.uploader.upload(req.files.file.path,(result)=>{
-      console.log(result);
+    //   console.log(result);
       res.status(200).send({
           public_id: result.public_id,
           url: result.url
@@ -72,7 +72,34 @@ router.post('/', (req, res) => {
 
     if(!isValid){
         res.status(400).json(errors);
-    } 
+    }
+    
+    console.log(`\n product.js: Name: ${req.body.name} \n`)
+    console.log(`\n product.js: Sizes: ${req.body.sizes} \n`)
+    console.log(`\n product.js: Colors: ${req.body.colors} \n`)
+
+    console.log(`\n product.js: Brand: ${req.body.brand}`)
+    console.log(`brand type: ${typeof req.body.brand}`);
+
+    console.log(`\n product.js: Description: ${req.body.description} \n`)
+    console.log(`\n product.js: Price: ${req.body.price} \n`)
+
+    console.log(`\n product.js: condition: ${req.body.condition}`);
+    console.log(`\n condition type: ${typeof req.body.condition}`);
+
+    console.log(`\n product.js: available: ${req.body.available}`)
+    console.log(`available type: ${typeof req.body.available}`);
+
+    console.log(`\n product.js: Shipping: ${req.body.shipping}`)
+    console.log(`shipping type: ${typeof req.body.shipping}`);
+    console.log(`\n product.js: Imgs: ${JSON.stringify(req.body.imgs)} \n`)
+
+
+    // console.log(`\n shipping type: ${typeof req.body.available}`);
+
+    console.log(`\n product.js: Imgs: ${JSON.stringify(req.body)} \n`)
+
+    console.log(`\n product.js: ${typeof req.body.name} \n`)
 
     Products.findOne({name: req.body.name}).then(product => {
         if(product){

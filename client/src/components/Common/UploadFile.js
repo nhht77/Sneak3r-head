@@ -16,15 +16,6 @@ class UploadFile extends Component {
             isUploading:false
         }
     }  
-
-    // static getDerivedStateFromProps(props,state){
-    //     if(props.reset){
-    //         return state = {
-    //             uploadedFiles:[]
-    //         }
-    //     }
-    //     return null;
-    // }
     
     onDisplayUploadedImg = () => (
         this.state.imgs.map( item => (
@@ -50,7 +41,7 @@ class UploadFile extends Component {
         axios.post('/api/products/upload',formData,config)
         .then(res => {
             this.setState({ imgs:[...this.state.imgs, res.data], isUploading:false })
-            console.log(this.state.imgs);
+            // console.log(this.state.imgs);
             this.props.onHandleImg(this.state.imgs);
         })
         .catch(err => {
@@ -93,4 +84,3 @@ class UploadFile extends Component {
 }
 
 export default UploadFile;
-// Spinner Width: 30%
