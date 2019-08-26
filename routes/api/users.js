@@ -75,7 +75,9 @@ router.post('/login', async (req, res) => {
             const {_id: id, firstname, lastname, email, password, role, cart, history } = user;	
             const payload = {id, firstname, lastname, email, password, role, cart, history};	
     
-                jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn:3600}, (err, token) => {	
+                jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn:3600}, (err, token) => {
+                console.log(process.env.SECRET_OR_KEY)
+                console.log(token)	
                 res.json({	
                     success:true,	
                     token: `bearer ${token}`	

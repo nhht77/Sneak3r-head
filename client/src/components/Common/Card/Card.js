@@ -6,7 +6,7 @@ export class Card extends Component {
 
     renderImages(img){
         if(img.length > 0){
-            return img[0].url
+            return img[0]
         } else {
             return '/resources/images/not-available.png'
         }
