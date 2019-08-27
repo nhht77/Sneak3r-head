@@ -34,8 +34,8 @@ class AddProduct extends Component {
             price:this.state.price,
             condition:this.state.condition,
             brand:this.state.brand,
-            available:this.state.available === 'true',
-            shipping:this.state.shipping === 'true',
+            available:this.state.available,// === 'true',
+            shipping:this.state.shipping,// === 'true',
             colors:this.state.colors,
             sizes:this.state.sizes,
             imgs:this.state.imgs

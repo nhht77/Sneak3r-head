@@ -8,6 +8,8 @@ const router     = express.Router();
 const isEmpty    = require('../../validation/is-empty');
 
 const Products   = require('../../models/Products');
+const Brands = require('../../models/Brands');
+const Conditions   = require('../../models/Condition');
 const validateProductInput = require('../../validation/products');
 
 // @route   POST api/products/upload
@@ -67,60 +69,52 @@ router.get('/ids', (req, res) => {
 // @desc    Post product route
 // @access  Private
 // passport.authenticate('jwt', {session:false})
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const { errors, isValid } = validateProductInput(req.body);
 
     if(!isValid){
         res.status(400).json(errors);
     }
-    
-    console.log(`\n product.js: Name: ${req.body.name} \n`)
-    console.log(`\n product.js: Sizes: ${req.body.sizes} \n`)
-    console.log(`\n product.js: Colors: ${req.body.colors} \n`)
 
-    console.log(`\n product.js: Brand: ${req.body.brand}`)
-    console.log(`brand type: ${typeof req.body.brand}`);
+    console.log(`\n product.js: ${JSON.stringify(req.body)} \n`)
 
-    console.log(`\n product.js: Description: ${req.body.description} \n`)
-    console.log(`\n product.js: Price: ${req.body.price} \n`)
+    let product = await Products.findOne({name: req.body.name})
+        .populate('brand')
+        .populate('conditions');
 
-    console.log(`\n product.js: condition: ${req.body.condition}`);
-    console.log(`\n condition type: ${typeof req.body.condition}`);
+    if(product){
+        errors.name = "This product is already registered";
+        return res.status(400).json(errors);
+    } else {
+        const newProduct  = new Products(req.body);
+        console.log(`product.js: Product CREATED ${JSON.stringify(newProduct)}`)
+        
+        if(typeof req.body.sizes !== "undefined"){
+            newProduct.sizes = req.body.sizes.split(",");    
+        }
+        
+        if(typeof req.body.colors !== "undefined"){
+            newProduct.colors = req.body.colors.split(",");    
+        }
 
-    console.log(`\n product.js: available: ${req.body.available}`)
-    console.log(`available type: ${typeof req.body.available}`);
-
-    console.log(`\n product.js: Shipping: ${req.body.shipping}`)
-    console.log(`shipping type: ${typeof req.body.shipping}`);
-    console.log(`\n product.js: Imgs: ${JSON.stringify(req.body.imgs)} \n`)
+        let brand = await Brands.findOne({name: req.body.brand});
+        newProduct.brand = brand._id;
+        console.log(`product.js find brand id: ${brand}`)
+        console.log(`product.js find brand: ${newProduct.brand}`)    
 
 
-    // console.log(`\n shipping type: ${typeof req.body.available}`);
+        let condition = await Conditions.findOne({name: req.body.condition});
+        newProduct.condition = condition._id
+        console.log(`product.js find condition id: ${condition}`)
+        console.log(`product.js find condition: ${newProduct.condition}`)  
 
-    console.log(`\n product.js: Imgs: ${JSON.stringify(req.body)} \n`)
-
-    console.log(`\n product.js: ${typeof req.body.name} \n`)
-
-    Products.findOne({name: req.body.name}).then(product => {
-        if(product){
-            errors.name = "This product is already registered";
-            return res.status(400).json(errors);
-        } else {
-            const newProduct  = new Products(req.body);
-
-            if(typeof req.body.sizes !== "undefined"){
-                newProduct.sizes = req.body.sizes.split(",");    
-            }
-            
-            if(typeof req.body.colors !== "undefined"){
-                newProduct.colors = req.body.colors.split(",");    
-            }
-
-            newProduct.save()
+        newProduct.save()
             .then(product => res.json(product))
             .catch(err => console.log(err))
+
+        console.log(`product.js: Product MODIFIED ${JSON.stringify(newProduct)}`)
+            
         }
-    })
 })
 
 // @route   GET api/products/
@@ -146,7 +140,7 @@ router.get('/', (req, res) => {
 })
 
 // @route   POST api/products/shop
-// @desc    Get Products by limits, brands, conditions filter
+// @desc    Get Products by limits, brands,s conditions filter
 // @access  Public
 router.post('/shop', (req, res) => {
     let order = req.body.order ? req.body.order : "desc";

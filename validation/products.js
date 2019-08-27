@@ -10,8 +10,8 @@ module.exports = function validateProductInput(data){
 
     data.brand = !isEmpty(data.brand) ? data.brand : '';
     data.condition = !isEmpty(data.condition) ? data.condition : '';
-    data.available = !isEmpty(data.available) ? data.available : '';
-    data.shipping = !isEmpty(data.shipping) ? data.shipping : '';
+    // data.available = !isEmpty(data.available) ? data.available : '';
+    // data.shipping = !isEmpty(data.shipping) ? data.shipping : '';
 
     data.sizes = !isEmpty(data.sizes) ? data.sizes : '';
     data.colors = !isEmpty(data.colors) ? data.colors : '';
@@ -36,13 +36,13 @@ module.exports = function validateProductInput(data){
         errors.condition = "Product condition field is required"
     }
     
-    if(Validator.isEmpty(data.available)){
-        errors.available = "Product availablility field is required"
-    }
+    // if(Validator.isEmpty(data.available)){
+    //     errors.available = "Product availablility field is required"
+    // }
     
-    if(Validator.isEmpty(data.shipping)){
-        errors.shipping = "Product shipping field is required"
-    }
+    // if(Validator.isEmpty(data.shipping)){
+    //     errors.shipping = "Product shipping field is required"
+    // }
 
     if(Validator.isEmpty(data.colors)){
         errors.colors = "Product colors field is required"
