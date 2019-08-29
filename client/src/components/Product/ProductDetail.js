@@ -9,13 +9,9 @@ import ProductSpecs from "./ProductSpecs";
 
 class ProductDetail extends Component {
     
-    componentDidMount(){
-        const id = this.props.match.params.id;
-        this.props.getProductById(id);
-    }
+    componentDidMount(){ this.props.getProductById(this.props.match.params.id); }
 
     render() {
-        console.log(this.props.product.byId)
     return (
       <div>
       <PageTop title="Product detail"/>
