@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
         if(err) res.json(err);
         res.json(brands);
     })
+    .catch(err => console.log(err))
 }); 
 
 // @route   POST api/brands/test

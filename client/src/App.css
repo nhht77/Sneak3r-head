@@ -540,10 +540,10 @@ body {
   
   }
   
-  .card-item-wrapper.grid-bars .action-container {
+.card-item-wrapper.grid-bars .action-container {
     flex-grow: 1;
     border: 1px solid #e6e6e6;
-  }
+}
   
   .card-item-wrapper.grid-bars .description{
     clear:both;

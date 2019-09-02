@@ -33,7 +33,6 @@ const CardGroup = ({title, products}) => {
     );
 }
 
-// { renderCards(list)}
 
 
 export default CardGroup;
