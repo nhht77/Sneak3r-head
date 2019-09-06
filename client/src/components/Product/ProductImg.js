@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Lightbox from "../Common/Lightbox";
 
 class ProductImg extends Component {
 
@@ -14,13 +15,18 @@ class ProductImg extends Component {
   componentDidMount() {
     let lightboxImages = this.props.detail.images.map( image => image.url);
     this.setState({
-      lightboxImages:[...this.state.lightboxImages, ...lightboxImages]
+      lightboxImages:[ ...lightboxImages]
     })
 
   }
 
-  handleLightBox = idx => console.log(idx);
+  handleLightBox = (position) => this.state.lightboxImages.length > 0 
+    ? this.setState({lightbox: true, imagePosition: position}) 
+    : '';
+    
 
+  handleLightBoxClose = () => this.setState({lightbox: false});
+  
   renderImages = (img) => (img.length > 0) ? img[0].url : '/resources/images/not-available.png';
 
   onThumbsDisplay = () => this.state.lightboxImages.map((item, i) => (
@@ -45,20 +51,19 @@ class ProductImg extends Component {
         <div className="main-thumbs">
           {this.state.lightboxImages.length > 0 ? this.onThumbsDisplay(this.props.detail) : ''}
         </div>
+        {this.state.lightbox ?
+          <Lightbox
+            id={this.props.detail.id}
+            images={this.state.lightboxImages}
+            open={this.state.open}
+            position={this.state.imagePosition}
+            onclose={() => this.handleLightBoxClose()}
+          />
+          : null
+        }
       </div>
     )
   }
 }
 
 export default ProductImg;
-// {
-  // this.state.lightbox ?
-    // <ImageLightBox
-      // id={detail.id}
-      // images={this.state.lightboxImages}
-      // open={this.state.open}
-      // pos={this.state.imagePos}
-      // onclose={() => this.handleLightBoxClose()}
-    // />
-    // : null
-// }
