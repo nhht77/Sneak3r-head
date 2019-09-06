@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import DefaultButton from "../Button/DefaultButton";
 import CartButton from '../Button/CartButton';
 
-export class Card extends Component {
+import { addProductToCart } from '../../../actions/authAction';
+
+class Card extends Component {
 
   renderImages = (img) => (img.length > 0) ? img[0].url :'/resources/images/not-available.png';
-    
+
   render() {
+    const { user: {user: {id}}, product } = this.props;
+
     return (
         <div className={`card-item-wrapper ${this.props.grid}`}>
         <div className="image"
@@ -40,7 +45,7 @@ export class Card extends Component {
             </div>
             <div className="button-wrap">
                 <CartButton 
-                    onClick={()=> console.log("You add an Item") }
+                    onClick={()=> this.props.addProductToCart(id, product) }
                 />
             </div>
             </div>
@@ -50,4 +55,6 @@ export class Card extends Component {
   }
 }
 
-export default Card
+const mapStateToProps = state => ({user: state.auth})
+
+export default connect(mapStateToProps, {addProductToCart})(Card)

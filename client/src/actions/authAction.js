@@ -1,4 +1,4 @@
-import {TEST_DISPATCH, GET_ERRORS, SET_CURRENT_USER} from './types';
+import {TEST_DISPATCH, GET_ERRORS, SET_CURRENT_USER, ADD_PRODUCT_TO_CART} from './types';
 
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -54,4 +54,14 @@ export const logoutUser = () => dispatch => {
     setAuthToken(false);
     // Set current user to {} which will set isAuthenticated to false
     dispatch(setCurrentUser({}));
-  };
+};
+
+export const addProductToCart = (user_id, product) => dispatch => {
+    console.log(user_id);
+    console.log(product);
+    axios.post()
+    dispatch({
+      type: ADD_PRODUCT_TO_CART,
+      payload: {product}
+    })
+}

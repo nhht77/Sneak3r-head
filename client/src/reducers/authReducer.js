@@ -1,4 +1,4 @@
-import { TEST_DISPATCH, SET_CURRENT_USER } from "../actions/types";
+import { TEST_DISPATCH, SET_CURRENT_USER, ADD_PRODUCT_TO_CART } from "../actions/types";
 import isEmpty from '../utils/is-empty';
 
 const initialState = {
@@ -19,6 +19,10 @@ export default function(state=initialState, action) {
                 isAuthenticated: !isEmpty(action.payload),
                 user: action.payload
             }
+      case ADD_PRODUCT_TO_CART:
+        return {
+          ...state
+        }
         default:
             return state;
     }
