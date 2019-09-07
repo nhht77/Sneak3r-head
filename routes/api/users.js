@@ -107,4 +107,27 @@ router.get('/current', passport.authenticate('jwt', {session:false}), (req, res)
     })
 })
 
+// @route   POST api/users/addToCart
+// @desc    Add a product to current user cart
+// @access  Private
+router.post('/addToCart', passport.authenticate('jwt', { session: false }), async (req, res) => {
+
+  let userID = req.user.id, {id, product} = req.body;
+  if (id === userID) {
+    
+    try {
+
+      let user = await User.findById(id);
+      user.cart = [...user.cart, product];
+      let newProductToUserCart = await user.save();
+      res.json(newProductToUserCart);
+
+    } catch (error) {
+      res.json(error)
+    }
+  }
+  
+})
+
+
 module.exports = router;
