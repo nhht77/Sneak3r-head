@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 // @route   POST api/brands/test
 // @desc    Post all brands route
-// @access  Public
+// @access  private
 router.post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
     const {errors, isValid} = validateBrandsInput(req.body);
 

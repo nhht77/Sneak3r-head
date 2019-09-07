@@ -69,7 +69,7 @@ router.get('/ids', (req, res) => {
 // @desc    Post product route
 // @access  Private
 // passport.authenticate('jwt', {session:false})
-router.post('/', async (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const { errors, isValid } = validateProductInput(req.body);
 
     if(!isValid){
