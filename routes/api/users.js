@@ -82,7 +82,7 @@ router.post('/login', async (req, res) => {
                 })	
             })	
         } else {	
-            errors.password = "The password is not correct";	
+            errors.password = "The password is not correct!";	
             res.status(400).send(errors);	
         }	
 
