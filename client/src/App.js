@@ -31,7 +31,7 @@ if(localStorage.jwtToken){
 
   // Check for expired Token
   let now = Date.now() / 1000;
-  if(token.exp < now){
+  if (decoded.exp < now){
     // Log User Out
     store.dispatch(logoutUser());
 

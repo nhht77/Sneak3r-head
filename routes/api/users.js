@@ -75,9 +75,7 @@ router.post('/login', async (req, res) => {
             const {_id: id, firstname, lastname, email, password, role, cart, history } = user;	
             const payload = {id, firstname, lastname, email, password, role, cart, history};	
     
-                jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn:3600}, (err, token) => {
-                console.log(process.env.SECRET_OR_KEY)
-                console.log(token)	
+          jwt.sign(payload, process.env.SECRET_OR_KEY, { expiresIn: '2h'}, (err, token) => {
                 res.json({	
                     success:true,	
                     token: `bearer ${token}`	
@@ -118,9 +116,13 @@ router.post('/addToCart', passport.authenticate('jwt', { session: false }), asyn
     try {
 
       let user = await User.findById(id);
-      user.cart = [...user.cart, product];
-      let newProductToUserCart = await user.save();
-      res.json(newProductToUserCart);
+
+      // What is the logic for detecting shoe size when add to cart?
+      // If not have product [0] then add. If it has increase quantity to 2
+      console.log(user.cart.filter( p => p._id === product._id ).length === 0 );
+      // = [...user.cart, product];
+      // let newProductToUserCart = await user.save();
+      // res.json(newProductToUserCart);
 
     } catch (error) {
       res.json(error)
