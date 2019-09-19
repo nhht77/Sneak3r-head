@@ -41,14 +41,6 @@ class AddProduct extends Component {
             imgs:this.state.imgs
         }
 
-        console.log("\n AddProduct.js: Submit()");
-        console.log(`\n AddProduct.js:`);
-        console.log(`\n ${JSON.stringify(newProduct)}`);
-        console.log(`\n shipping type: ${typeof newProduct.available}`);
-        console.log(`\n available type: ${typeof newProduct.shipping}`);
-        console.log(`\n brand type: ${typeof newProduct.brand}`);
-        console.log(`\n condition type: ${typeof newProduct.condition}`);
-
         this.props.addProduct(newProduct, this.props.history)
         this.setState({
             name:"", description:"", price:null, condition:"", brand:"",
