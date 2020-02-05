@@ -2,6 +2,23 @@
 
 > E-commerce app built with the MERN stack.
 
+## Installation and Setup
+
+Create .env file with these variable:
+
+```bash
+CLOUD_NAME=YOUR_CLOUD_NAME
+CLOUD_API_KEY=YOUR_CLOUD_API_KEY
+CLOUD_SECRET_API=YOUR_CLOUD_SECRET_API
+MONGO_URI=UOUR_MONGO_URI
+SECRET_OR_KEY=YOUR_SECRET_OR_KEY
+```
+
+You are required to have Cloudinary API and it can be obtained by creating an account at https://cloudinary.com
+
+You would also need to change mongoDB connection to local database if you do not have a MongoURI at mongodb atlas.
+
+
 ## Quick Start
 
 ```bash

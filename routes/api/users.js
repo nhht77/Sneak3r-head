@@ -5,8 +5,6 @@ const gravatar = require('gravatar');
 const jwt      = require('jsonwebtoken');
 const passport = require('passport');
 
-const configKey  = require('../../config/keys').secretOrKey
-
 // Load User model
 const User = require('../../models/User');
 
