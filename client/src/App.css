@@ -461,9 +461,13 @@ body {
     margin-bottom: 50px;
   }
   
-  .card-group-shop .card-item-wrapper {
-    float: left;
-    width: 33.3%;
+  .card-group-shop{
+    flex-wrap: wrap;
+    display: flex;
+  }
+  
+  .card-group-shop > .card-item-wrapper {
+    flex-basis: 33%;
     margin-bottom: 1.25rem;
   }
   
@@ -472,8 +476,8 @@ body {
   ==============================*/
   
   .card-item-wrapper {
-    flex-grow: 1;
-    width: 25%;
+    /* flex-grow: 1; */
+    /* width: 25%; */
     padding: 0 1.25rem;
     box-sizing: border-box;
     position: relative;
@@ -510,8 +514,10 @@ body {
   .card-item-wrapper .tags .name {
     font-size: 1.25rem;
     font-weight: 700;
+    line-height: 22px;
+    height: 50px;
   }
-  
+
   .card-item-wrapper .tags .price {
     font-weight: 300;
     font-size: 1.25rem;
